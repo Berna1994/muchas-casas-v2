@@ -1,0 +1,25 @@
+<div style="align-items: flex-start;" class="paginador-container">
+  <div class="div-paginador">
+
+    <ul class="pagination"> 
+      <ng-container *ngFor="let personaje of personajes; let i = index">
+        <li>
+          <button (click)="currentPage = i" [class.active]="currentPage === i">
+            <img [src]="getToken(getGeneroPersonaje(i))" class="tokens">
+            <br>
+            {{ getNombrePersonaje(i) }}
+          </button>
+        </li>
+      </ng-container>      
+    </ul>
+      
+  </div>
+      
+  <!-- Mostrar la personaje seleccionado -->
+  <div class="contenido">
+    <h3 style="display: inline;">Oficio: </h3> <p style="display: inline;">{{ getOficioPersonaje(currentPage) }}</p>
+    <br><br>
+    <h3 style="display: inline;">Descripcion: </h3><p style="display: inline;">{{getDescripcionPersonaje(currentPage)}}</p>
+  </div>
+
+</div>

@@ -1,0 +1,15 @@
+.gift-antorcha {
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    opacity: 0.9;
+  }
+  
+  .gift-antorcha img {
+    width: 100%;
+    height: auto;
+    transition: none;
+
+  }
+  

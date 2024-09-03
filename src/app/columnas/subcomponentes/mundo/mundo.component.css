@@ -1,0 +1,139 @@
+:host {
+  overflow: hidden;
+}
+
+.paginador-container {
+  width: 100%; /* O el ancho deseado del contenedor */
+  height: 100%;
+}
+
+.pagination {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: absolute;
+  
+}
+
+.pagination li {
+  margin: 0 1px;
+}
+
+.pagination button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  position: absolute;
+  border: none;
+  padding: 0;
+}
+
+.pagination button.active {
+  border: 5px;
+  border-color: beige;
+}
+
+.div-mundo {
+  background-color: rgba(237, 235, 207, 0.5);
+  word-wrap: break-word; /* Hace que el texto se ajuste a la línea */
+  white-space: pre-line; /* Permite que el texto envuelva normalmente */
+  display: flex;
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  flex-direction: column; /* Alinea los elementos verticalmente */
+  justify-content: flex-start; /* Alinea el contenido al principio verticalmente */
+  height: 50vh;
+  width: 40vw;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  border-color: black; 
+  border-style: groove;   
+  box-sizing: border-box; /* Incluye padding y borde dentro del tamaño total */
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: grey black;
+  user-select: none;
+  font-weight: bold;
+  padding: 10px;
+}
+
+:host {
+  height: 100%;
+}
+
+.resaltar-boton {
+  position: absolute;
+  width: 200px;
+  height: 210px;
+  position: absolute; /* Posiciona el div absolutamente dentro del button */
+  top: 50%; /* Coloca el centro del div en el centro vertical del button */
+  left: 50%; /* Coloca el centro del div en el centro horizontal del button */
+  transform: translate(-50%, -50%); /* Ajusta el div para que quede centrado */
+  visibility: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/images/columna-izquierda/brilloBoton.png');
+  overflow: visible;
+}
+
+button:hover .resaltar-boton {
+  visibility: visible;
+}
+.X {
+  background-color: brown;
+  color: beige;
+  border-color: black;
+  border-style: outset;
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  right: 0%;
+  text-align: center;
+  margin-right: 10px;
+  
+}
+
+.b1 {
+  background-image: url('/images/columna-izquierda/muchasCasas.png');
+  transform: translate(140%, 150%);
+  color: white;
+  width: 20vw;
+  height: 10vw;
+  background-size: cover;
+}
+.b2 {
+  background-image: url('/images/columna-izquierda/vaca.png');
+  background-size: contain;
+  transform: translate(30%, 250%);
+  color: white;
+  width: 14vw;
+  height: 10vw;
+} 
+.b3 {
+  background-image: url('/images/columna-izquierda/montania.png');
+  transform: translate(40%, 20%);
+  background-size: contain;
+  color: white;
+  width: 13vw;
+  height: 15vw;
+}
+.b4 {
+  background-image: url('/images/columna-izquierda/driade.png');
+  background-size: contain;
+  transform: translate(280%, 160%);
+  color: white;
+  width: 20vw;
+  height: 14vw;
+}
+.b5{
+  background-image: url('/images/columna-izquierda/pino.png');
+  background-size: cover;
+  transform: translate(600%, 25%);
+  color: white;
+  width: 10vw;
+  height: 15vw;
+} 
+ 
