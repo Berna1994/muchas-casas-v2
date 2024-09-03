@@ -1,0 +1,32 @@
+.paginador-container {
+  width: 100%; /* O el ancho deseado del contenedor */
+}
+
+.pagination {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.pagination li {
+  flex: 1; /* Hace que todos los elementos <li> crezcan igual */
+}
+
+.pagination button {
+  width: 100%; /* Hace que el botón ocupe todo el ancho del <li> */
+  padding: 10px;
+  background-color: rgb(205, 179, 162); /* Ajusta según tu diseño */
+  border: 2px solid black; 
+  border-style: outset;
+  box-sizing: border-box;
+}
+
+.pagination button.active {
+  font-weight: bold;
+  background-color: #c7956c;
+}
+
+.div-informe {
+  padding: 10px;
+}

@@ -1,0 +1,71 @@
+
+<div class="contenedor-columnas">
+
+  <!-- LADO IZQUIERDO -->
+
+  <div class="columna-izquierda">
+      <button class="boton-columna" (click)="clickInformes(); ocultarElemento('informes'); actualizarBotonesActivos()">
+        <h3>Informes</h3>
+        <div class="antorcha-izq">
+          <app-gift-antorchas class="fuego" [ngClass]="{'oculto': elementosOcultos.includes('informes')}"></app-gift-antorchas>
+        </div>
+        
+      </button>
+      <button class="boton-columna" (click)="clickMisiones(); ocultarElemento('misiones'); actualizarBotonesActivos()">
+        <h3>Misiones</h3>
+        <div class="antorcha-izq">
+          <app-gift-antorchas class="fuego" [ngClass]="{'oculto': elementosOcultos.includes('misiones')}"></app-gift-antorchas>
+        </div>
+      </button>
+      <button class="boton-columna" (click)="clickHistoria(); ocultarElemento('historia'); actualizarBotonesActivos()">
+        <h3>Historia</h3>
+        <div class="antorcha-izq">
+          <app-gift-antorchas class="fuego" [ngClass]="{'oculto': elementosOcultos.includes('historia')}"></app-gift-antorchas>
+        </div>
+      </button>
+      <button class="boton-columna" (click)="clickPersonajes(); ocultarElemento('personajes'); actualizarBotonesActivos()">
+        <h3>Personajes</h3>
+        <div class="antorcha-izq">
+          <app-gift-antorchas class="fuego" [ngClass]="{'oculto': elementosOcultos.includes('personajes')}"></app-gift-antorchas>
+        </div>
+      </button>
+  </div>
+  <div class="ventana-izq" *ngIf="isDivVisible" [ngClass]="{'active-ventana-izq': mapaMundo === true}"> 
+    <ng-container *ngComponentOutlet="currentComponent"></ng-container>
+  </div>
+  <!--       CENTRO          -->
+  <div class="espacio-entre-columnas" >
+    <button id="button-left" class="b-int-left b-int-hover" *ngIf="botIzqActivo" (click)="botEntreColumnas($event); actualizarBotonesActivos()">
+      {{"<"}}
+    </button>
+    <button id="button-right" class="b-int-right b-int-hover" *ngIf="botDerActivo" (click)="botEntreColumnas($event); actualizarBotonesActivos()">
+      {{">"}}
+    </button>
+    <button id="button-bottom" class="b-int-bottom b-int-hover" *ngIf="botBajoActivo" (click)="botEntreColumnas($event); actualizarBotonesActivos()">
+      {{"∨"}}
+    </button>
+  </div>
+
+  <!-- LADO DERECHO -->
+  
+  <div class="columna-derecha">
+    <div class="boton-columna">
+    </div>
+    <div class="boton-columna">
+    </div>
+    <div class="boton-columna">
+    </div>
+    <div class="boton-columna">
+    </div>
+  </div>
+  
+  </div>
+
+
+  <!-- pajarito ------------------------------------------------->
+  <app-pajarito [isDivVisible]="isDivVisible"></app-pajarito>
+
+
+
+  
+

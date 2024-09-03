@@ -1,0 +1,64 @@
+<div class="paginador-container">
+  <ul class="pagination">
+    <li><button (click)="goToPage(1)" [class.active]="currentPage === 1">Ancestros</button></li>
+    <li><button (click)="goToPage(2)" [class.active]="currentPage === 2">Historias</button></li>
+    <li><button (click)="goToPage(3)" [class.active]="currentPage === 3">Criaturas</button></li>
+  </ul>
+</div>
+
+<div  class="div-historia">
+  <!-- ancestros -->
+  <div *ngIf="currentPage === 1">
+    <h3>{{ ancestros[0].titulo }}</h3>
+    {{ ancestros[0].texto }}
+    <hr style="border-color: black;">
+
+    <h3>{{ ancestros[1].titulo }}</h3>
+    {{ ancestros[1].texto }}
+    <hr style="border-color: black;">
+
+    <h3>{{ ancestros[2].titulo }}</h3>
+    {{ ancestros[2].texto }}
+    <hr style="border-color: black;">
+
+    <h3>{{ ancestros[3].titulo }}</h3>
+    {{ ancestros[3].texto }}
+    <hr style="border-color: black;">
+
+    <h3>{{ ancestros[4].titulo }}</h3>
+    {{ ancestros[4].texto }}
+    <hr style="border-color: black;">
+
+    <h3>{{ ancestros[5].titulo }}</h3>
+    {{ ancestros[5].texto }}
+    <hr style="border-color: black;">
+
+    <h3>{{ ancestros[6].titulo }}</h3>
+    {{ ancestros[6].texto }}
+
+  </div>
+  <!-- historias -->
+  <div *ngIf="currentPage === 2">
+    <h3>{{ historias[0].titulo }}</h3>
+    {{ historias[0].texto }}
+    <hr style="border-color: black;">
+
+    <h3>{{ historias[1].titulo }}</h3>
+    {{ historias[1].texto }}
+  </div>
+  <!-- criaturas -->
+  <div *ngIf="currentPage === 3">
+    <h3>{{ criaturas[0].titulo }}</h3>
+    {{ criaturas[0].texto }}
+    <hr style="border-color: black;">
+
+    <h3>{{ criaturas[1].titulo }}</h3>
+    {{ criaturas[1].texto }}
+    <hr style="border-color: black;">
+
+    <h3>{{ criaturas[2].titulo }}</h3>
+    {{ criaturas[2].texto }}
+
+  </div>
+    
+  </div>

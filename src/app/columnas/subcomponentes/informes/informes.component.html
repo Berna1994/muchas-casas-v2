@@ -1,0 +1,29 @@
+<div class="paginador-container">
+  <ul class="pagination">
+    <li><button (click)="goToPage(1)" [class.active]="currentPage === 1">Noticias</button></li>
+    <li><button (click)="goToPage(2)" [class.active]="currentPage === 2">Proyectos</button></li>
+    <li><button (click)="goToPage(3)" [class.active]="currentPage === 3">Recursos</button></li>
+  </ul>
+</div>
+
+<div  class="div-informe"> <!-- informes -->
+  <div *ngIf="currentPage === 1">
+    <h3>{{noticias[0]}}</h3>
+    {{noticias[1]}}
+    <hr style="border-color: black;">
+  </div>
+
+  <div *ngIf="currentPage === 2" style="white-space: pre-wrap;"> <!-- proyectos -->
+    <h3>{{proyectos[0]}}</h3>
+    <h4>{{proyectos[1]}}</h4>
+    {{proyectos[2]}}
+    <hr style="border-color: black;">
+    <h3>{{proyectos[3]}}</h3>
+    <h4>{{proyectos[4]}}</h4>
+    {{proyectos[5]}}
+  </div>
+  
+  <div *ngIf="currentPage === 3"> <!-- recursos -->
+    {{recursos[0]}}
+  </div>
+</div>  

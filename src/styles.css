@@ -1,0 +1,42 @@
+html, body, app-root, app-columnas{
+  height: 100%;
+}
+
+body {
+    background-image: url('/images/background-body.jpg');
+    background-size: 90% 108%; /* Ancho completo del contenedor, altura extendida al 120% */
+    background-position: center bottom; /* Centra horizontalmente y alinea al fondo verticalmente */
+    background-repeat: no-repeat;
+    background-color: rgb(45, 34, 0);
+    margin: 0;
+    padding: 0;  
+  }
+
+* {
+  font-family: 'Trebuchet MS', sans-serif;
+  user-select: none;
+  -webkit-user-drag: none;
+} /* establece el tipo de fuente universal para todo textoen el codigo */
+
+* button:hover {
+  cursor: pointer;
+}
+  
+/* Ensure that your application content is above the background */
+app-root {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+app-informes{ /*  no se si esto devo escribirlo aca o en otro css */
+  width: 100%;
+}
+app-historia{ /*  no se si esto devo escribirlo aca o en otro css */
+  width: 100%;
+}
+app-misiones{ /*  no se si esto devo escribirlo aca o en otro css */
+  width: 100%;
+}
+app-mundo{ /*  no se si esto devo escribirlo aca o en otro css */
+  width: 100%;
+}

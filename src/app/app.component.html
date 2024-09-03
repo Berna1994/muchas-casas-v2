@@ -1,0 +1,54 @@
+<div class="div-banner-columnas">
+
+  <div class="col" class="banner">
+    <h1>Edad de Piedra</h1>
+    <Button *ngIf="!columnasComponent?.isDivVisible"  class="boton-turnos" (click)="booleanDivTurnos()" [disabled]="verDivTurnos || verDivTurnos2">
+      <!-- *ngIf="!columnasComponent?.isDivVisible" ES LA FORMA DE USAR LA VARIABLE DEL COMP HIJO PARA MOSTRAR O NO EL BOTON-->
+      <p style="position: absolute; right: 15%; top: 30%; font-weight: bolder;">Siguiente dia</p>
+    </Button>
+  </div>
+
+<app-columnas></app-columnas>
+
+  
+
+<button class="boton-prologo" *ngIf="verBotonPrologo" (click)="clickBotonPrologo()">Prólogo</button>
+
+<div class="prologo" *ngIf="verPrologo" (click)="clickPrologo()">
+  Erar Saram ha despertado con visiones de un futuro que no deve ocurrir, pero la edad lo tiene al borde del otro mundo. <br>
+  Un nuevo Gran Lider deve ser nombrado pronto, y solo con el mas capaz de todos los hombres el viejo sabio confiara la guia de Lam-Tolis,  La sima pedregosa, para salvar a Muchas Casas. <br>
+  La tierra cambia, las bestias huyen para  cazar y ser cazadas, los hermanos se aburren  y una enemistad enerna despierta ofreciendo sangre al cielo.
+</div>
+
+<div class="div-turnos" *ngIf="verDivTurnos">
+  <p>Te preparas para descansar luego de un largo dia</p>
+
+  <button class="boton-dormir" (click)="booleanDivTurnos(); booleanDivTurnos2(); dialogosPasarTurno();" (click)="incrementarContador()">Dormir</button> 
+
+  <button class="boton-cancelar" (click)="booleanDivTurnos()">Cancelar</button>
+</div>
+
+<div class="div-interacciones-turno" *ngIf="verDivTurnos2" >
+  <div style="padding-bottom: 10px;">
+    {{ mostrarTextoTemporal ? textoTemporal : nuevoArray[varContadorDeClicks] }}
+  </div>
+
+  <div class="div-hijo-interacciones-turno" >
+    
+    <button style="visibility: hidden;">
+      boton falso para hacer espacio en el div
+    </button>
+
+    <div class="mover-div-centro" *ngIf="verBotonesIntTurnos">
+      <button *ngIf="mostrarBotonesInteraccion" (click)="respuestasTurnosSI() " style="font-size: 16px;">
+        {{si}}</button>
+      <button *ngIf="mostrarBotonesInteraccion" (click)="respuestasTurnosNO() "style="margin-left: 10px; font-size: 16px;">
+        {{no}}</button>
+    </div>
+
+    <button (click)="contadorDeClicks();" class="mover-boton-derecha" style="font-size: 16px;" *ngIf="!verBotonesIntTurnos">
+      siguiente
+    </button>
+
+  </div>
+</div>

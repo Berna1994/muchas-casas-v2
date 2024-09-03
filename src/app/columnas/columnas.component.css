@@ -1,0 +1,201 @@
+  
+  .contenedor-columnas{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  .boton-columna{
+    height: 18%;
+    background-image: url('/images/columna-izquierda/cuero.png'); 
+    opacity: 1; 
+    color: rgb(233, 185, 165);
+    text-shadow: 2px 1px 2px black;
+    font-size: large;
+    background-size: 100% 100%;
+    background-position: center;  
+    background-repeat: no-repeat;
+    background-color: transparent; /* Fondo transparente para mostrar la imagen correctamente */
+    border: 0;
+  }
+
+  .columna-izquierda{
+    display: flex;
+    word-wrap: break-word; /* Ajusta el texto para que no salga del div */
+    width: 20vh;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
+    background-image: url('/images/columna-izquierda/madera1.png');
+    background-size: 150% 130%;
+    background-position: center;  
+    background-repeat: no-repeat;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 2), 4px 4px 2px rgba(0, 0, 0, 2);
+    flex-direction: column;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    justify-content: space-between;
+  }
+  
+  .columna-derecha{
+    display: flex;
+    word-wrap: break-word; /* Ajusta el texto para que no salga del div */
+    width: 20vh;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
+    background-image: url('/images/columna-izquierda/madera1.png');
+    background-size: 120% 120%;
+    background-position: center;  
+    background-repeat: no-repeat;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 2), 4px 4px 2px rgba(0, 0, 0, 2); 
+    flex-direction: column;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    justify-content: space-between;
+  }
+
+  .espacio-entre-columnas {
+    flex: 1;
+    position: relative;
+    pointer-events: none;
+  }
+  
+  .b-int-left{
+    position: absolute;
+    top: 50%;
+    background-color: rgba(117, 116, 114, 0.363) ;
+    color: rgba(239, 239, 239, 0.4); /* color del texto */
+    height: 60px;
+    width: 40px;
+    font-size: 200%;
+    font-weight: bolder;
+    margin-left: 10px;
+    opacity: 0;
+    pointer-events: auto;       /* el div padre no permite interactuar con el mouse*/
+  }
+
+  .b-int-right {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    background-color: rgba(117, 116, 114, 0.363) ;
+    color: rgba(239, 239, 239, 0.4); /* color del texto */
+    height: 60px;
+    width: 40px;
+    font-size: 200%;
+    font-weight: bolder;
+    margin-right: 10px;
+    opacity: 0;
+    pointer-events: auto;      /* el div padre no permite interactuar con el mouse*/
+  }
+
+  .b-int-bottom {
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    background-color: rgba(117, 116, 114, 0.363) ;
+    color: rgba(239, 239, 239, 0.4); /* color del texto */
+    height: 40px;
+    width: 60px;
+    font-size: 160%;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    opacity: 0;
+    pointer-events: auto;  /* el div padre no permite interactuar con el mouse*/
+
+    padding-bottom: 2px;
+  }
+
+  .b-int-hover:hover {
+    opacity: 1; /* Visible al pasar el mouse */
+  }
+
+  .antorcha-izq {
+    position: absolute;
+    background-image: url('/images/columna-izquierda/antorcha-izq.png');
+    background-size: contain;
+    height: 50px;
+    width: 35px;
+    z-index: -1;
+    transform: translate(18vh, -10vh); 
+    pointer-events: none;
+  }
+
+
+
+  /* +++++++++++++++++++    LADO IZQUIERDO              +++++++++++++*/    
+
+
+  .ventana-izq {
+    background-color: rgba(237, 235, 207, 0.5);
+    word-wrap: break-word; /* Hace que el texto se ajuste a la línea */
+    white-space: pre-line; /* Permite que el texto envuelva normalmente */
+    display: flex;
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    flex-direction: column; /* Alinea los elementos verticalmente */
+    justify-content: flex-start; /* Alinea el contenido al principio verticalmente */
+    height: 70vh;
+    width: 50vw;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    border-color: black; 
+    border-style: groove;   
+    box-sizing: border-box; /* Incluye padding y borde dentro del tamaño total */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: grey black;
+    user-select: none;
+    font-weight: bold;
+  }
+  .active-ventana-izq {
+    width: calc(100% - 40vh);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    overflow: visible;
+  }
+
+  .sub-div-izq{
+    size: inherit;
+    position: absolute;
+  }
+
+  .clase-background-izq{
+    position: absolute; /* esta clase solo se usa para el ts */
+  }
+  .clase-informes{
+    background-image: url('/images/columna-izquierda/background-informes.png');
+  }
+
+  .clase-historia{
+    background-image: url('/images/columna-izquierda/background-historia.jpg');
+
+  }
+  .clase-misiones{
+    background-image: url('/images/columna-izquierda/background-misiones.jpg');
+  }
+
+  .clase-personajes{
+    background-image: url('/images/columna-izquierda/background-personajes.png');
+  }
+
+  .fuego {
+    position: relative;
+    top: -25%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+
+  }
+
+  .oculto {
+    display: none;
+  }
+
+
+
+ /* +++++++++++++++++++    LADO DERECHO              +++++++++++++*/    
+
+
+

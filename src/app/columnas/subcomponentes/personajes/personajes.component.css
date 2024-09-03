@@ -1,0 +1,59 @@
+:host {
+  height: 100%;
+  overflow: hidden;
+}
+
+.paginador-container {
+  width: 100%; /* O el ancho deseado del contenedor */
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.div-paginador{
+  display: flex;
+  flex-direction: row; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  min-width: fit-content;
+  height: 100%
+}
+
+.pagination {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  flex-direction: column;
+}
+
+.lista-en-linea li {
+  display: inline-block; /* O inline */
+}
+
+.pagination button {
+  width: 100%; /* Hace que el botón ocupe todo el ancho del <li> */
+  height: 100%;
+  background-color: rgb(205, 179, 162);
+  border: 2px solid black; 
+  border-style: outset;
+  box-sizing: border-box;
+}
+
+.pagination button.active {
+  background-color: #c7956c;
+  cursor: default;
+}
+
+
+.contenido {
+  padding: 10px;
+  overflow-y: auto;
+  height: 100%
+}
+
+.tokens {
+  width: 100%; 
+  height: 137px;
+}
