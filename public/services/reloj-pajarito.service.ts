@@ -14,6 +14,7 @@ export class RelojPajaritoService {
   private getRandomTime(): number {
     const times = [60000, 300000, 600000]; // Tiempos en milisegundos 60000, 300000, 600000
     const randomIndex = Math.floor(Math.random() * times.length);
+    console.log (times[randomIndex] + ' milisegundos para el pajarito')
     return times[randomIndex];
   }
 
