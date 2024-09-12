@@ -4,7 +4,7 @@ html, body, app-root, app-columnas{
 
 body {
     background-image: url('/images/background-body.jpg');
-    background-size: 90% 108%; /* Ancho completo del contenedor, altura extendida al 120% */
+    background-size: 100% 100%; /* Ancho completo del contenedor, altura extendida al 120% */
     background-position: center bottom; /* Centra horizontalmente y alinea al fondo verticalmente */
     background-repeat: no-repeat;
     background-color: rgb(45, 34, 0);

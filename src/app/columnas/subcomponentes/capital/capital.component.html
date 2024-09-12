@@ -1,5 +1,5 @@
 <div class="paginador-container">
-    <ul class="pagination" style="list-style: none;">
+    <ul class="pagination"  style="list-style: none;">
       <li><button (click)="goToPage(1)" [class.active]="currentPage === 1" class="b1">
         <div class="resaltar-boton"></div>
       </button></li>
@@ -9,21 +9,12 @@
       <li><button (click)="goToPage(3)" [class.active]="currentPage === 3" class="b3">
         <div class="resaltar-boton"></div>
       </button></li>
-      <li><button (click)="goToPage(4)" [class.active]="currentPage === 4" class="b4">
-        <div class="resaltar-boton"></div>
-      </button></li>
-      <li><button (click)="goToPage(5)" [class.active]="currentPage === 5" class="b5">
-        <div class="resaltar-boton"></div>
-      </button></li>
     </ul>
-    <div *ngIf="currentPage > 0" class="div-mundo">
-      <span (click)="cerarDiv()" class="X">X</span>
+    <div *ngIf="currentPage > 0" class="div-palacio">
+      <span (click)="cerarDiv()" class="X">X</span><!-- 
       <h2 style="align-self: center; margin: 5px;">{{ tituloMapa[currentPage - 1] }} <hr style="border-color: black;"></h2>
       <p style="font-weight: bolder;">{{ subTituloMapa[currentPage - 1] }}</p>
-      <p>{{ mapa[currentPage - 1] }}</p>
+      <p>{{ mapa[currentPage - 1] }}</p> -->
     </div>
           
 </div>
-  
-
-

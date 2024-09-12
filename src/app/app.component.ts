@@ -75,8 +75,8 @@ export class AppComponent {
               "no": "Le pides que deje de limpiar por ahora, tu te haras cargo de eso mas tarde. Finalmente te levantas bien descansado y de buen humor."
               },
               /* 3 */ 
-              {"si": "Gingik interrumpe tu festin y te pregunta molesta ¿porque te lo comiste? Le respondes que no habia otra opcion",
-              "no": "Gingik interrumpe tu festin y te pregunta molesta ¿porque te lo comiste? Le respondes que no habia otra opcion",
+              {"si": "Gingik interrumpe tu festin y te pregunta molesta ¿porque te lo comiste? \nLe respondes que no habia otra opcion.",
+              "no": "Gingik interrumpe tu festin y te pregunta molesta ¿porque te lo comiste? \nLe respondes que no habia otra opcion.",
               },
           
      ];
@@ -97,7 +97,7 @@ export class AppComponent {
     
     this.columnasComponent.isDivVisible = false;
     document.body.style.backgroundImage = "url('/images/background-body.jpg')";
-    document.body.style.backgroundSize = " 90% 108%"; 
+    document.body.style.backgroundSize = " 100% 100%"; 
   }
 
   booleanDivTurnos2() {

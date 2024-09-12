@@ -8,11 +8,6 @@
   height: 100%;
 }
 
-.pagination {
-/* es al pedo poner estilo aca porque el navegador no lo lee, pero lo necesito apra los sub-estilos del paginador */
-overflow: hidden;
-}
-
 .pagination li {
   margin: 0 1px;
 }
@@ -30,7 +25,7 @@ overflow: hidden;
   border-color: beige;
 }
 
-.div-mundo {
+.div-palacio {
   background-color: rgba(237, 235, 207, 0.5);
   word-wrap: break-word; /* Hace que el texto se ajuste a la línea */
   white-space: pre-line; /* Permite que el texto envuelva normalmente */
@@ -58,8 +53,8 @@ overflow: hidden;
 
 .resaltar-boton {
   position: absolute;
-  width: 200px;
-  height: 210px;
+  width: 180px;
+  height: 180px;
   position: absolute; /* Posiciona el div absolutamente dentro del button */
   top: 50%; /* Coloca el centro del div en el centro vertical del button */
   left: 50%; /* Coloca el centro del div en el centro horizontal del button */
@@ -75,6 +70,7 @@ overflow: hidden;
 button:hover .resaltar-boton {
   visibility: visible;
 }
+
 .X {
   background-color: brown;
   color: beige;
@@ -86,47 +82,43 @@ button:hover .resaltar-boton {
   right: 0%;
   text-align: center;
   margin-right: 10px;
-  
 }
 
 .b1 {
-  background-image: url('/images/columna-izquierda/muchasCasas.png');
-  transform: translate(140%, 150%);
-  color: white;
-  width: 20vw;
-  height: 10vw;
-  background-size: cover;
-}
-.b2 {
-  background-image: url('/images/columna-izquierda/vaca.png');
+  background-color: aquamarine;
   background-size: contain;
-  transform: translate(30%, 250%);
   color: white;
-  width: 14vw;
-  height: 10vw;
+  width: 250px;
+  height: 350px;  
+}
+.b1A{
+  background-image: url('/images/columna-izquierda/palacio/interactuables/tools.png');
+  transform: translate(23vw, 35vh);
+}
+.b1B{
+
+}
+.b1C{
+  
+}
+.b1D{
+  
+}
+
+
+.b2 {
+  background-image: url('/images/t2.png');
+  background-size: contain;
+  transform: translate(0%, 0%);
+  color: white;
+  width: 150px;
+  height: 150px;
 } 
 .b3 {
-  background-image: url('/images/columna-izquierda/montania.png');
-  transform: translate(40%, 20%);
+  background-image: url('/images/t3.png');
+  transform: translate(0%, 180%);
   background-size: contain;
   color: white;
-  width: 13vw;
-  height: 15vw;
+  width: 150px;
+  height: 150px;
 }
-.b4 {
-  background-image: url('/images/columna-izquierda/driade.png');
-  background-size: contain;
-  transform: translate(270%, 170%);
-  color: white;
-  width: 20vw;
-  height: 14vw;
-}
-.b5{
-  background-image: url('/images/columna-izquierda/pino.png');
-  background-size: cover;
-  transform: translate(600%, 25%);
-  color: white;
-  width: 10vw;
-  height: 15vw;
-} 
- 

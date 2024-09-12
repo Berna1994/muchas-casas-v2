@@ -59,21 +59,21 @@
   
   .b-int-left{
     position: absolute;
-    top: 50%;
+    top: 45%;
     background-color: rgba(117, 116, 114, 0.363) ;
     color: rgba(239, 239, 239, 0.4); /* color del texto */
     height: 60px;
     width: 40px;
     font-size: 200%;
     font-weight: bolder;
-    margin-left: 10px;
+    margin-left: 20px;
     opacity: 0;
     pointer-events: auto;       /* el div padre no permite interactuar con el mouse*/
   }
 
   .b-int-right {
     position: absolute;
-    top: 50%;
+    top: 45%;
     right: 0%;
     background-color: rgba(117, 116, 114, 0.363) ;
     color: rgba(239, 239, 239, 0.4); /* color del texto */
@@ -81,7 +81,7 @@
     width: 40px;
     font-size: 200%;
     font-weight: bolder;
-    margin-right: 10px;
+    margin-right: 20px;
     opacity: 0;
     pointer-events: auto;      /* el div padre no permite interactuar con el mouse*/
   }
@@ -96,7 +96,7 @@
     width: 60px;
     font-size: 160%;
     font-weight: bolder;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     opacity: 0;
     pointer-events: auto;  /* el div padre no permite interactuar con el mouse*/
 

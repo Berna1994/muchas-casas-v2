@@ -5,9 +5,9 @@
       <ng-container *ngFor="let personaje of personajes; let i = index">
         <li>
           <button (click)="currentPage = i" [class.active]="currentPage === i">
-            <img [src]="getToken(getGeneroPersonaje(i))" class="tokens">
-            <br>
             {{ getNombrePersonaje(i) }}
+            <br>
+            <img [src]="getToken(getGeneroPersonaje(i))" class="tokens">
           </button>
         </li>
       </ng-container>      

@@ -23,9 +23,7 @@ export class PajaritoComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    // Inicia el intervalo para llamar a la función cada 20 segundos
-    this.RelojPajaritoService.startReloj();
-
+    this.RelojPajaritoService.startReloj();     // llama a la función del reloj aleatorio del servicio
     // Suscribirse al observable del servicio
     this.RelojPajaritoService.Reloj$.subscribe(() => {
       this.images = document.querySelectorAll('.pajaro') as NodeListOf<HTMLImageElement>;
@@ -42,6 +40,7 @@ export class PajaritoComponent implements OnInit, OnDestroy {
 
   startImageRotation() {
     console.log ('se llamo a rotacion de imagenes')
+    this.RelojPajaritoService.startReloj();     // llama a la función del reloj aleatorio del servicio
     if (this.totalImages === 0) return;
   
     const updateInterval = () => {

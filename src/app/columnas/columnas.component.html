@@ -9,7 +9,6 @@
         <div class="antorcha-izq">
           <app-gift-antorchas class="fuego" [ngClass]="{'oculto': elementosOcultos.includes('informes')}"></app-gift-antorchas>
         </div>
-        
       </button>
       <button class="boton-columna" (click)="clickMisiones(); ocultarElemento('misiones'); actualizarBotonesActivos()">
         <h3>Misiones</h3>
@@ -30,8 +29,12 @@
         </div>
       </button>
   </div>
-  <div class="ventana-izq" *ngIf="isDivVisible" [ngClass]="{'active-ventana-izq': mapaMundo === true}"> 
-    <ng-container *ngComponentOutlet="currentComponent"></ng-container>
+  <div class="ventana-izq" *ngIf="isDivVisible" [ngClass]="{'active-ventana-izq': mapaActivo }"> 
+    <ng-container *ngComponentOutlet="currentComponent" [mapaPalacio]="valorParaMapaPalacio"
+    [mapaPalacioCocina1]="valorParaMapaPalacioCocina1"
+    [mapaPalacioCocina2]="valorParaMapaPalacioCocina2"
+    [mapaPalacioDormitorio]="valorParaMapaPalacioDormitorio"
+    [mapaCapital]="valorParaMapaCapital">></ng-container>
   </div>
   <!--       CENTRO          -->
   <div class="espacio-entre-columnas" >
