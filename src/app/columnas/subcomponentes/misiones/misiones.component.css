@@ -24,7 +24,8 @@
   border: 2px solid black; 
   border-style: outset;
   box-sizing: border-box;
-  
+  font-weight: bolder;
+  font-size: medium;
 }
 
 .pagination button.active {
@@ -37,6 +38,7 @@
   top: 0%;
   right: 0%;
   min-width: fit-content;
+  font-weight: bolder;
 }
 
 .div-superior{
@@ -95,6 +97,6 @@
   background-color: grey;
   width: 5%;
   padding: 5px;
-  font-weight: bolder;
+
   opacity: 1;
 }

@@ -1,0 +1,36 @@
+<div class="paginador-container">
+    <ul class="pagination"  style="list-style: none;">
+      
+      <li><button (click)="goToPage(1)" class="b1"> <!-- //bosque -->
+          <div class="resaltar-boton"></div>
+       </button></li>
+      <li><button (click)="goToPage(2)" class="b2"> <!-- //ciervo -->
+          <div class="resaltar-boton"></div>
+        </button></li>
+      <li><button (click)="goToPage(4)" class="b3"> <!-- //lluvia -->
+          <div class="resaltar-boton"></div>
+        </button></li>
+      <li><button (click)="goToPage(5)" class="b4"> <!-- //madre -->
+          <div class="resaltar-boton"></div>
+        </button></li>
+      <li><button (click)="goToPage(6)" class="b5"> <!-- //sol -->
+          <div class="resaltar-boton"></div>
+        </button></li>
+      <li><button (click)="goToPage(3)" class="b6"> <!-- //luna -->
+          <div class="resaltar-boton"></div>
+        </button></li>
+
+    </ul>
+    <div *ngIf="currentPage > 0" class="div-estrellas">
+      <div class="div-bg-constelaciones">
+      </div>
+      <div class="texto-interactivo">
+        <h3 style="text-align: center; text-decoration: underline; text-decoration-thickness: 2px; margin-top: 0;">
+          {{ ArrayTextosConstelaciones[(currentPage-1)].titulo }}
+        </h3>
+        {{ ArrayTextosConstelaciones[(currentPage-1)].texto }}</div>
+        <div class="img-estrellas" [ngStyle]="{'background-image': 'url(' + rutaImgConstelaciones[(currentPage-1)] + ')'}"></div>
+        <span (click)="cerarDiv()" class="X">X</span> 
+    </div>
+          
+</div>

@@ -30,11 +30,7 @@
       </button>
   </div>
   <div class="ventana-izq" *ngIf="isDivVisible" [ngClass]="{'active-ventana-izq': mapaActivo }"> 
-    <ng-container *ngComponentOutlet="currentComponent" [mapaPalacio]="valorParaMapaPalacio"
-    [mapaPalacioCocina1]="valorParaMapaPalacioCocina1"
-    [mapaPalacioCocina2]="valorParaMapaPalacioCocina2"
-    [mapaPalacioDormitorio]="valorParaMapaPalacioDormitorio"
-    [mapaCapital]="valorParaMapaCapital">></ng-container>
+    <ng-container *ngComponentOutlet="currentComponent"></ng-container>
   </div>
   <!--       CENTRO          -->
   <div class="espacio-entre-columnas" >

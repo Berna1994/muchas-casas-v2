@@ -1,5 +1,5 @@
-import { Component, Injector } from '@angular/core';
-import { createCustomElement } from '@angular/elements';
+import { CommonModule } from '@angular/common';
+import { Component} from '@angular/core';
 import { InformesComponent } from './subcomponentes/informes/informes.component';
 import { MisionesComponent } from './subcomponentes/misiones/misiones.component';
 import { HistoriaComponent } from './subcomponentes/historia/historia.component';
@@ -8,13 +8,14 @@ import { MundoComponent } from './subcomponentes/mundo/mundo.component';
 import { PalacioComponent } from './subcomponentes/palacio/palacio.component';
 import { ImagenGiftAntorchasComponent } from './gift-antorchas/gift-antorchas.component';
 import { PajaritoComponent } from './pajarito/pajarito.component';
-import { CapitalComponent } from './subcomponentes/capital/capital.component';
-import { CommonModule } from '@angular/common';
+import { EstrellasComponent } from './subcomponentes/estrellas/estrellas.component';
+import { MapasActivosService } from '../../../public/services/mapas-activos.service';
+
 
 @Component({
   selector: 'app-columnas',
   standalone: true,
-  imports: [CommonModule, 
+  imports: [CommonModule,
     InformesComponent, 
     MisionesComponent, 
     HistoriaComponent, 
@@ -38,32 +39,26 @@ export class ColumnasComponent {
   botDerActivo = true
   botBajoActivo = true
  
-
+  constructor(private mapasActivosService: MapasActivosService) {}
+  
   menuPrincipal = true
   ventanaIzq = false
   mapaMundo = false
 
-  mapaPalacio = false
-  mapaPalacioCocina1 = false
-  mapaPalacioCocina2 = false
-  mapaPalacioDormitorio = false
-
-  mapaCapital = false
-
   get mapaActivo(): boolean {
-    return this.mapaMundo || this.mapaPalacio || this.mapaPalacioCocina1 || this.mapaPalacioCocina2 || this.mapaPalacioDormitorio || this.  mapaCapital
+    return this.mapaMundo || this.mapasActivosService.mapaPalacio || this.mapasActivosService.mapaPalacioCocina1 || this.mapasActivosService.mapaPalacioCocina2 || this.mapasActivosService.mapaPalacioDormitorio || this.mapasActivosService.mapaEstrellas
   }
 
 
   currentComponent: any; // se usa para saber cual componente mostrar en la ventana izq
 
   actualizarBotonesActivos() {
-    console.log(' cocina1: ' + this.mapaPalacioCocina1 + 
-      ' mapa palacio' + this.mapaPalacio + 
-      ' cocina 2 ' + this.mapaPalacioCocina2 +
-      ' dormitorios ' + this.mapaPalacioDormitorio + 
-      ' menu principal ' + this.menuPrincipal +
-      ' capital ' + this.mapaCapital
+    console.log(' cocina1: ' + this.mapasActivosService.mapaPalacioCocina1 + '\n' +
+      ' mapa palacio: ' + this.mapasActivosService.mapaPalacio + '\n' + 
+      ' cocina 2: ' + this.mapasActivosService.mapaPalacioCocina2 + '\n' +
+      ' dormitorios: ' + this.mapasActivosService.mapaPalacioDormitorio + '\n' + 
+      ' menu principal: ' + this.menuPrincipal + '\n' +
+      ' estrellas: ' + this.mapasActivosService.mapaEstrellas
     )
     if (this.menuPrincipal) {
       this.botIzqActivo = true;
@@ -80,27 +75,27 @@ export class ColumnasComponent {
       this.botDerActivo = true;
       this.botBajoActivo = false;
       return
-    } else if(this.mapaPalacio) {
+    } else if(this.mapasActivosService.mapaPalacio) {
       this.botIzqActivo = true;
       this.botDerActivo = true;
       this.botBajoActivo = true;
       return
-    } else if (this.mapaPalacioCocina1){
+    } else if (this.mapasActivosService.mapaPalacioCocina1){
       this.botIzqActivo = true;
       this.botDerActivo = true;
       this.botBajoActivo = false;
       return
-    } else if (this.mapaPalacioCocina2){
-      this.botIzqActivo = false;
+    } else if (this.mapasActivosService.mapaPalacioCocina2){
+      this.botIzqActivo = true;
       this.botDerActivo = true;
       this.botBajoActivo = false;
       return
-    }else if (this.mapaPalacioDormitorio){
+    }else if (this.mapasActivosService.mapaPalacioDormitorio){
       this.botIzqActivo = true;
       this.botDerActivo = false;
       this.botBajoActivo = false;
       return
-    } else if(this.mapaCapital) {
+    } else if(this.mapasActivosService.mapaEstrellas) {
       this.botIzqActivo = true;
       this.botDerActivo = false;
       this.botBajoActivo = false;
@@ -141,8 +136,8 @@ export class ColumnasComponent {
       this.menuPrincipal = false
       this.ventanaIzq = true
       this.mapaMundo = false
-      this.mapaPalacio = false
-      this.mapaCapital = false
+      this.mapasActivosService.mapaPalacio = false
+      this.mapasActivosService.mapaEstrellas = false
     } else {
       this.backtoMenu()
     }
@@ -163,8 +158,8 @@ export class ColumnasComponent {
       this.menuPrincipal = false
       this.ventanaIzq = true
       this.mapaMundo = false
-      this.mapaPalacio = false
-      this.mapaCapital = false
+      this.mapasActivosService.mapaPalacio = false
+      this.mapasActivosService.mapaEstrellas = false
     } else {
       this.backtoMenu()
     }
@@ -185,8 +180,8 @@ export class ColumnasComponent {
       this.menuPrincipal = false
       this.ventanaIzq = true
       this.mapaMundo = false
-      this.mapaPalacio = false
-      this.mapaCapital = false
+      this.mapasActivosService.mapaPalacio = false
+      this.mapasActivosService.mapaEstrellas = false
     } else {
       this.backtoMenu()  
     }
@@ -208,8 +203,8 @@ export class ColumnasComponent {
       this.menuPrincipal = false
       this.ventanaIzq = true
       this.mapaMundo = false
-      this.mapaPalacio = false
-      this.mapaCapital = false
+      this.mapasActivosService.mapaPalacio = false
+      this.mapasActivosService.mapaEstrellas = false
     } else {
       this.backtoMenu()
     }
@@ -236,8 +231,8 @@ export class ColumnasComponent {
       this.menuPrincipal = false
       this.ventanaIzq = false
       this.mapaMundo = true
-      this.mapaPalacio = false
-      this.mapaCapital = false
+      this.mapasActivosService.mapaPalacio = false
+      this.mapasActivosService.mapaEstrellas = false
     } else {
       this.backtoMenu()
     }
@@ -259,8 +254,10 @@ export class ColumnasComponent {
       this.menuPrincipal = false
       this.ventanaIzq = false
       this.mapaMundo = false
-      this.mapaPalacio = true
-      this.mapaCapital = false
+      this.mapasActivosService.mapaPalacioCocina1 = false
+      this.mapasActivosService.mapaPalacio = true
+      this.mapasActivosService.mapaPalacioDormitorio = false
+      this.mapasActivosService.mapaEstrellas = false
     } else {
       this.backtoMenu()
     }
@@ -274,10 +271,10 @@ export class ColumnasComponent {
       document.body.style.backgroundImage = "url('/images/columna-izquierda/palacio/cocina1.jpg')";
       document.body.style.backgroundSize = "calc(100% - 40vh) 100%"; 
 
-      this.mapaPalacio = false
-      this.mapaPalacioCocina1 = true
-      this.mapaPalacioCocina2 = false
-      this.mapaPalacioDormitorio = false
+      this.mapasActivosService.mapaPalacio = false
+      this.mapasActivosService.mapaPalacioCocina1 = true
+      this.mapasActivosService.mapaPalacioCocina2 = false
+      this.mapasActivosService.mapaPalacioDormitorio = false
 
     } else {
       this.backtoMenu()
@@ -291,15 +288,15 @@ export class ColumnasComponent {
       document.body.style.backgroundImage = "url('/images/columna-izquierda/palacio/cocina2.jpg')";
       document.body.style.backgroundSize = "calc(100% - 40vh) 100%"; 
 
-      this.mapaPalacio = false
-      this.mapaPalacioCocina1 = false
-      this.mapaPalacioCocina2 = true
-      this.mapaPalacioDormitorio = false
+      this.mapasActivosService.mapaPalacio = false
+      this.mapasActivosService.mapaPalacioCocina1 = false
+      this.mapasActivosService.mapaPalacioCocina2 = true
+      this.mapasActivosService.mapaPalacioDormitorio = false
 
     } else {
       this.backtoMenu()
     }
-    console.log ("se ejecuto con exito back to menu")
+    console.log ("se ejecuto con exito cocina2")
   }
 
   clickpalacio_dormitorio(): void {
@@ -308,10 +305,10 @@ export class ColumnasComponent {
       document.body.style.backgroundImage = "url('/images/columna-izquierda/palacio/dormitorio.jpg')";
       document.body.style.backgroundSize = "calc(100% - 40vh) 100%"; 
 
-      this.mapaPalacio = false
-      this.mapaPalacioCocina1 = false
-      this.mapaPalacioCocina2 = false
-      this.mapaPalacioDormitorio = true
+      this.mapasActivosService.mapaPalacio = false
+      this.mapasActivosService.mapaPalacioCocina1 = false
+      this.mapasActivosService.mapaPalacioCocina2 = false
+      this.mapasActivosService.mapaPalacioDormitorio = true
 
     } else {
       this.backtoMenu()
@@ -320,7 +317,7 @@ export class ColumnasComponent {
   }
   
   
-  clickcapital(): void {
+  clickestrellas(): void {
         //funcion para pasar entre ventanas sin invisivilisar el div
         if (this.contadorBotones === 7 ) {
           /* no poner nada aca */
@@ -329,18 +326,18 @@ export class ColumnasComponent {
         // fin funcion ...
         /* this.claseBackgroundIzq = 'clase-mundo'; */ //esta clase no se usa por que tiene un fondo interactivo, no de los con transparencia
         if (this.isDivVisible === true){
-          document.body.style.backgroundImage = "url('/images/columna-izquierda/capital/estrellas.png')";
+          document.body.style.backgroundImage = "url('/images/columna-izquierda/estrellas/estrellas.png')";
           document.body.style.backgroundSize = "calc(100% - 40vh) 91%"; 
           this.menuPrincipal = false
           this.ventanaIzq = false
           this.mapaMundo = false
-          this.mapaPalacio = false
-          this.mapaCapital = true
+          this.mapasActivosService.mapaPalacio = false
+          this.mapasActivosService.mapaEstrellas = true
         } else {
           this.backtoMenu()
         }
-        this.currentComponent = CapitalComponent;  // esto se usa para q el css de la ventana izq sea el de mundo
-        console.log ("se ejecuto con exito mapa capital")
+        this.currentComponent = EstrellasComponent;  // esto se usa para q el css de la ventana izq sea el de mundo
+        console.log ("se ejecuto con exito mapa estrellas")
   }
 
   backtoMenu() {
@@ -350,12 +347,12 @@ export class ColumnasComponent {
         this.ventanaIzq = false
         this.mapaMundo = false
 
-        this.mapaPalacio = false
-        this.mapaPalacioCocina1 = false
-        this.mapaPalacioCocina2 = false
-        this.mapaPalacioDormitorio = false
+        this.mapasActivosService.mapaPalacio = false
+        this.mapasActivosService.mapaPalacioCocina1 = false
+        this.mapasActivosService.mapaPalacioCocina2 = false
+        this.mapasActivosService.mapaPalacioDormitorio = false
 
-        this.mapaCapital = false
+        this.mapasActivosService.mapaEstrellas = false
         this.isDivVisible = false
         this.contadorBotones = 0
   }
@@ -374,8 +371,8 @@ botEntreColumnas(event: MouseEvent){
       this.clickmundo()
     }
     if (idBoton.id === "button-right") {
-      console.log ("se llamo a clickcapital()")
-      this.clickcapital();
+      console.log ("se llamo a clickestrellas()")
+      this.clickestrellas();
     }
     if (idBoton.id === "button-bottom") {
       console.log ("se llamo a clickpalacio()")
@@ -384,10 +381,12 @@ botEntreColumnas(event: MouseEvent){
     return           /* **** importante poner el return sino se activa el boton con 
                       la nueva pantalla como si hubiera clikeado devuelta **** */
   }
+/*****/
   if (this.ventanaIzq === true){   
     console.log ("se desactivaroon los botones entre columnas") 
     return                                                          // OTRO MENU ACTIVO
   }
+/*****/
   if (this.mapaMundo === true){                                 // MUNDO ACTIVO
 
       if (idBoton.id === "button-right") {
@@ -395,7 +394,8 @@ botEntreColumnas(event: MouseEvent){
       }
       return
   }
-  if (this.mapaPalacio === true){                                 // PALACIO ACTIVO
+/*****/
+  if (this.mapasActivosService.mapaPalacio === true){                                 // PALACIO ACTIVO
 
     if (idBoton.id === "button-bottom") {
       this.backtoMenu()
@@ -412,8 +412,8 @@ botEntreColumnas(event: MouseEvent){
       return
     }
     }
-    //------------------
-  if (this.mapaPalacioCocina1 === true){                              //COCINA1
+/*****/   
+  if (this.mapasActivosService.mapaPalacioCocina1 === true){              //COCINA1
 
     if (idBoton.id === "button-left") {
       this.clickpalacio_cocina2()
@@ -426,17 +426,22 @@ botEntreColumnas(event: MouseEvent){
       return
     }
     }
-    //------------------                                                //COCINA2
-  if (this.mapaPalacioCocina2 === true){                                 
+/*****/                                                                //COCINA2
+  if (this.mapasActivosService.mapaPalacioCocina2 === true){                                 
 
+    if (idBoton.id === "button-left") {
+      this.backtoMenu()
+      console.log ("se llamo a backtomenu()")
+      return
+    }
     if (idBoton.id === "button-right") {
       this.clickpalacio_cocina1()
       console.log ("se llamo a clickpalacio_cocina1()")
       return
     }
     }
-    //------------------  
-  if (this.mapaPalacioDormitorio === true){                                 // DORMITORIO
+/*****/ 
+  if (this.mapasActivosService.mapaPalacioDormitorio === true){                // DORMITORIO
 
     if (idBoton.id === "button-left") {
       this.clickpalacio()
@@ -445,11 +450,11 @@ botEntreColumnas(event: MouseEvent){
     }
     }
 
-    //------------------                               // CAPITAL ACTIVO
-  if (this.mapaCapital === true) {                                 
+/*****/                                                     // Estrellas ACTIVO
+  if (this.mapasActivosService.mapaEstrellas === true) {                                 
     if (idBoton.id === "button-left") {
       this.backtoMenu()
-      console.log ("se llamo a mapa capital()")
+      console.log ("se llamo a mapa estrellas()")
     }
     return
   }

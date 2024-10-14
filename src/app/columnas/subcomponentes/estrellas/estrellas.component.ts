@@ -2,15 +2,31 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-capital',
+  selector: 'app-estrellas',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './capital.component.html',
-  styleUrls: ['./capital.component.css']
+  templateUrl: './estrellas.component.html',
+  styleUrls: ['./estrellas.component.css']
 })
-export class CapitalComponent {
+export class EstrellasComponent {
   currentPage: number = 0;
-  totalPages: number = 3;
+  totalPages: number = 6;
+  rutaImgConstelaciones: string []= [
+    `/images/columna-izquierda/estrellas/c-bosque.png`,
+    `/images/columna-izquierda/estrellas/c-ciervo.png`,
+    `/images/columna-izquierda/estrellas/c-luna.png`,
+    `/images/columna-izquierda/estrellas/c-lluvia.png`,
+    `/images/columna-izquierda/estrellas/c-madre.png`,
+    `/images/columna-izquierda/estrellas/c-sol.png`,
+  ]
+  ArrayTextosConstelaciones = [ 
+    {titulo: `Shàmman-Fotthor`, texto: `Espíritu de los bosques densos y oscuros, la noche, frío y maldiciones.` },
+    {titulo: `Uvel-Idar`, texto: `Padre de las bestias peligrosas y espíritu de la caza y la fiereza.`},
+    {titulo: `Riras-Ïlon, la luna mayor`, texto: `Espíritu de la protección, el amor y la belleza`},
+    {titulo: `Anrrizudar`, texto: `Su nombre significa cielo lluvioso, es el espíritu de los rios, el viento y tormentas.`},
+    {titulo: `Volal-Tolis`, texto: ` La montaña nevada, madre de los hombres (enanos) y diosa de la fertilidad, la vida, y la curación.`},
+    {titulo: `Ziril-Nòm`, texto: `El canario solar, criatura espiritual que da la luz, el calor y el fuego.`},
+  ]
 
 /*   mapa: string[] = [
     `Ubicado en tierras altas y boscosas, a los pies de la sagrada montaña de Lam Tolis, yace Shàmman-Zoden, un bullisioso asentamiento cullo nombre significa muchas-casas. Aqui tienen hogar inmumerables familias, distibuidas en pequeñas parcelas con casas de piedra y madera con una particular forma arqueada que les da una aparienca de domo. Estas casas no son especialmente grandes pero suelen conectarse entre varias muy cercanas para crear habitaciones mas amplias para las familias numerosas.
@@ -60,13 +76,13 @@ export class CapitalComponent {
   ];
  */
   
-  
   goToPage(page: number): void {
-    if (page > 0 && page <= this.totalPages) {
+    if (page >= 0 && page <= this.totalPages) {
       this.currentPage = page;
       console.log ("currentPage:_" + this.currentPage)
     }
   }
+
   cerarDiv(){
     this.currentPage = 0
   }

@@ -1,8 +1,11 @@
 :host {
-    overflow: hidden;
     height: 100%;
   }
-  
+
+  .pagination {
+    position: relative;
+  }
+ 
   .paginador-container {
     width: 100%; /* O el ancho deseado del contenedor */
     height: 100%;
@@ -13,8 +16,8 @@
   }
   
   .pagination button {
-    background-color: transparent;
     background-repeat: no-repeat;
+    background-color: transparent;
     position: absolute;
     border: none;
     padding: 0;
@@ -25,15 +28,15 @@
     border-color: beige;
   }
   
-  .div-palacio {
-    background-color: rgba(237, 235, 207, 0.5);
+  .div-estrellas {
+    background-color: rgba(207, 222, 237, 0.3);
     word-wrap: break-word; /* Hace que el texto se ajuste a la línea */
     white-space: pre-line; /* Permite que el texto envuelva normalmente */
     display: flex;
+    flex-direction: column;
     position: absolute;
     background-size: cover;
     background-position: center;
-    flex-direction: column; /* Alinea los elementos verticalmente */
     justify-content: flex-start; /* Alinea el contenido al principio verticalmente */
     height: 50vh;
     width: 40vw;
@@ -43,28 +46,11 @@
     border-color: black; 
     border-style: groove;   
     box-sizing: border-box; /* Incluye padding y borde dentro del tamaño total */
-    overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: grey black;
     user-select: none;
     font-weight: bold;
     padding: 10px;
-  }
-  
-  .resaltar-boton {
-    position: absolute;
-    width: 200px;
-    height: 210px;
-    position: absolute; /* Posiciona el div absolutamente dentro del button */
-    top: 50%; /* Coloca el centro del div en el centro vertical del button */
-    left: 50%; /* Coloca el centro del div en el centro horizontal del button */
-    transform: translate(-50%, -50%); /* Ajusta el div para que quede centrado */
-    visibility: hidden;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url('/images/columna-izquierda/brilloBoton.png');
-    overflow: visible;
   }
   
   button:hover .resaltar-boton {
@@ -82,29 +68,68 @@
     right: 0%;
     text-align: center;
     margin-right: 10px;
+    z-index: 5;
   }
   
   .b1 {
-    background-image: url('/images/t1.png');
-    background-size: contain;
-    transform: translate(180%, 0%);
-    color: white;
-    width: 200px;
-    height: 200px;
+    top: 378px;
+    left: 892px;
+    width: 120px;
+    height: 140px;
+    
   }
   .b2 {
-    background-image: url('/images/t2.png');
-    background-size: contain;
-    transform: translate(0%, 0%);
-    color: white;
-    width: 200px;
-    height: 200px;
+    top: -15px;
+    left: 509px;
+    width: 250px;
+    height: 165px;
   } 
   .b3 {
-    background-image: url('/images/t3.png');
-    transform: translate(0%, 180%);
+    top: 441px; 
+    left: 253px;
+    width: 145px;
+    height: 120px;
+  }
+  .b4 {
+    top: 213px; 
+    left: 124px;
+    width: 112px;
+    height: 107px;
+  }
+  .b5 {
+    top: 617px; 
+    left: 1066px;
+    width: 80px;
+    height: 60px;
+  }
+  .b6 {
+    top: -26px; 
+    left: 58px;
+    width: 140px;
+    height: 110px;
+  }
+
+  .div-bg-constelaciones{
+    width: calc(100% - 20px);
+    height: calc(100% - 10px);
     background-size: contain;
-    color: white;
-    width: 200px;
-    height: 200px;
+    background-position: center;
+    position: absolute;
+    background-repeat: no-repeat;
+    opacity: 0.6; 
+  }
+
+  .texto-interactivo{
+    z-index: 2;
+    margin: 15px;
+    font-size: 18px;
+    align-self: center;
+  }
+
+  .img-estrellas {
+    display: flex;
+    flex: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }

@@ -157,7 +157,7 @@ export class AppComponent {
       ],
       mensajesAcostarce: [
           "Te sientes muy comodo entre las viejas pieles y te preguntas de que animal seran. Duermes pensando si se trata de una criatura adorable y suavecita o una bestia temible.",
-          "Sientes algo pinchando tu pie entre las pieles. Encuentras una pequeña garra que se ha desprendido de lo que era la piel de la mano d ela criatura, no encuentras ninguna otra garra.",
+          "Sientes algo pinchando tu pie entre las pieles. Encuentras una pequeña garra que se ha desprendido de lo que era la piel de la mano de la criatura, no encuentras ninguna otra garra.",
           "Los insectos te molestan con el ruido dentro y fuera del hogar. Tapas tu cabeza con pieles y consigues caer en el sueño.",
           "No te sientes cansado esta noche y buscas a Gingik para charlar, pero la encuentras durmiendo. Finalmente te fuerzas a dormir y lo consigues tras un largo rato.",
           "Estas tan cansado que te tiras en la cama sin siquiera taparte y te duermes en el acto.",

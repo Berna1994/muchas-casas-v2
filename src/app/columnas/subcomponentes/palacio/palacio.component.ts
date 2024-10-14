@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MapasActivosService } from '../../../../../public/services/mapas-activos.service';
 
 @Component({
   selector: 'app-palacio',
@@ -12,13 +13,51 @@ import { CommonModule } from '@angular/common';
 export class PalacioComponent {
   currentPage: number = 0;
   totalPages: number = 3;
-  @Input() mapaPalacio: boolean = false;
-  @Input() mapaPalacioCocina1: boolean = false;
-  @Input() mapaPalacioCocina2: boolean = false;
-  @Input() mapaPalacioDormitorio: boolean = false;
-  @Input() mapaCapital: boolean = false;
+  rutaImgInteractuables: string = "no-string";
+  textoInteractivo: string = "no-string"
 
 
+  textosInteractivosPalacio: string[] = [
+    `La manufactura de herramientas de piedra experimentó avances significativos durante generaciones. Se perfeccionaron técnicas como la percusión y pulido de piedras para crear herramientas más sofisticadas para gran variedad de actividades, arpones para la pesca, utensilios para extraer dientes infectados, procesar alimentos o bien producir bloques de construccion. 
+    
+    El uso de estas herramientas impulsó una transformación social y económica, marcando la transición hacia un estilo de vida sedentario basado en la formación de acentamientos permanentes y edificaciones que requerian una sofisticada de coordinacion de entre personas para llevarse a cavo.`, 
+
+    `Las pieles son uno de los recursos mas apreciados, no solo por impresindibles como abrigo sino tambien por su belleza. 
+    Devido a la abundancia de recursos y el comportamiento sedentario de las nuevas comunidades, se ha generado multitud de nuevos usos para estos recursos, fomentando el intercambio y la especializacion del trabajo.
+    
+    En muchas tribus la posesion de pieles es un simbolo de riqueza o prestigio, por lo que siempre hay personas dispuestas a intercambiarlas por algo valioso.`,
+  ];
+  textosInteractivosCocina1: string[] = [
+    `La carne es el alimento mas importante para cualquier persona, no solo su aporte proteinico permitio el desarrollo del cerebro, sino que la busqueda insaciable de este alimento fue el mayor estimulo para la innovacion y la creatividad.
+
+    Sin embargo, mantener la carne comestible sigue siendo un problema, por lo que se utilizan varias maneras para tratarla. Si bien se usan todo tipo de ingredientes para este fin, como hiervas, miel o incluso arcilla, la forma mas comun de tratarla es cocinarla con humo.
+    
+    Mientras el calor de la hogera derrite la grasa, (la cual se estropea mucho mas rapido que la carne), el humo mata los germenes aerobicos y crea una capa desidratada sobre la carne que ralentiza su descomposicion.`, 
+
+    `El arte de trabajar la piedra no se limita al uso practico de herramientas. En la sociedad de los enanos se elige este material primero por sobre ningun otro, el hecho de haber sobrevivido durante generaciones en las cuevas a forzado a este pueblo a convertirce en grandes maestros en el tallado de la piedra, eligiendo a menudo distintos materiales para distintas funciones.
+
+    Por ejemplo, la piedra caliza se usa para la construccion devido a su abundancia y relativa facilidad de extraccion.
+    El marmol y el granito se usan para objetos ornamentales por su color y tenacidad.
+    Las piedras cristalinas como el cuarzo se utilizan para toda clase de fines ceremoniales y curativos, muy populares entre los chamanes.
+    El silex o pedernal se usa para herramientas y utensilios de corte devido a su gran filo.
+    Y la dolomita se utiliza para la cocina y recientemente en la fundicion de metal devido a su gran resistencia al calor. 
+    `,
+  ];
+  textosInteractivosCocina2: string[] = [
+    `El bosque ofrece todo tipo de nueces, bayas, verduras, miel, huevos y demas alimentos estacionarios que complementan la dieta habitual de una familia.`,
+
+    `Los hongos no son solamente una fuente mas de alimento, han servido a los enanos desde tiempos remotos cuando deambulaban en las cavernas. Tienen una variedad de usos que van desde mantener brazas calientes para iniciar un fuego, intoxicar el agua para recolectar peces, sirven como pigmentos para tatuajes y ceremonias, y por supuesto los homgos magicos que permiten a los chamanes conectarse con sus visiones.`,
+    
+    `"Desde que el primer enano aprendio a recolectar alimento, una alimaña aprendio a robarlo".
+
+    Aunque las ardillas, comadrejas, ratones y demas pequeños mamiferos son mascotas muy populares entre los niños, no suelen retenerlas por mucho tiempo cuando se les dice que a partir de ahora toda su comida sera para la pequeña criatura si no la hechan del hogar.`,
+  ];
+  textosInteractivosDormitorio: string[] = [
+    `Texto 1`, 
+    `Texto 2`,
+  ];
+  
+  constructor(private mapasActivosService: MapasActivosService) {}
 
 /*   mapa: string[] = [
     `Ubicado en tierras altas y boscosas, a los pies de la sagrada montaña de Lam Tolis, yace Shàmman-Zoden, un bullisioso asentamiento cullo nombre significa muchas-casas. Aqui tienen hogar inmumerables familias, distibuidas en pequeñas parcelas con casas de piedra y madera con una particular forma arqueada que les da una aparienca de domo. Estas casas no son especialmente grandes pero suelen conectarse entre varias muy cercanas para crear habitaciones mas amplias para las familias numerosas.
@@ -67,13 +106,90 @@ export class PalacioComponent {
     `,
   ];
  */
-  
+  get mapaPalacio(): boolean {
+    return this.mapasActivosService.mapaPalacio;
+  }
+  get mapaPalacioCocina1(): boolean {
+    return this.mapasActivosService.mapaPalacioCocina1;
+  }
+  get mapaPalacioCocina2(): boolean {
+    return this.mapasActivosService.mapaPalacioCocina2;
+  }
+  get mapaPalacioDormitorio(): boolean {
+    return this.mapasActivosService.mapaPalacioDormitorio;
+  }
+  get mapaEstrellas(): boolean {
+    return this.mapasActivosService.mapaEstrellas;
+  }
+
   
   goToPage(page: number): void {
     if (page > 0 && page <= this.totalPages) {
       this.currentPage = page;
       console.log ("currentPage:_" + this.currentPage)
     }
+
+    if (this.currentPage === 1) {
+      switch (true) {
+        case this.mapaPalacio:
+          this.rutaImgInteractuables = '/images/columna-izquierda/palacio/interactuables/tools.png';
+          this.textoInteractivo = this.textosInteractivosPalacio[0]
+          break;
+        case this.mapaPalacioCocina1:
+          this.rutaImgInteractuables = '/images/columna-izquierda/palacio/interactuables/smoked-meat.png';
+          this.textoInteractivo = this.textosInteractivosCocina1[0]
+          break;
+        case this.mapaPalacioCocina2:
+          this.rutaImgInteractuables = '/images/columna-izquierda/palacio/interactuables/frutos-secos.png';
+          this.textoInteractivo = this.textosInteractivosCocina2[0]
+          break;
+        case this.mapaPalacioDormitorio:
+          this.rutaImgInteractuables = '';
+          this.textoInteractivo = this.textosInteractivosPalacio[0]
+          break;
+      }
+    }
+    else if (this.currentPage === 2) {
+      switch (true) {
+        case this.mapaPalacio:
+          this.rutaImgInteractuables = '/images/columna-izquierda/palacio/interactuables/hide.png';
+          this.textoInteractivo = this.textosInteractivosPalacio[1]
+          break;
+        case this.mapaPalacioCocina1:
+          this.rutaImgInteractuables = '/images/columna-izquierda/palacio/interactuables/stone-plate.png';
+          this.textoInteractivo = this.textosInteractivosCocina1[1]
+          break;
+        case this.mapaPalacioCocina2:
+          this.rutaImgInteractuables = '/images/columna-izquierda/palacio/interactuables/dry-mushrooms.png';
+          this.textoInteractivo = this.textosInteractivosCocina2[1]
+          break;
+        case this.mapaPalacioDormitorio:
+          this.rutaImgInteractuables = '';
+          this.textoInteractivo = this.textosInteractivosPalacio[0]
+          break;
+      }
+    }
+    else if (this.currentPage === 3) {
+      switch (true) {
+        case this.mapaPalacio:
+          this.rutaImgInteractuables = '';
+          this.textoInteractivo = this.textosInteractivosPalacio[2]
+          break;
+        case this.mapaPalacioCocina1:
+          this.rutaImgInteractuables = '';
+          this.textoInteractivo = this.textosInteractivosCocina1[2]
+          break;
+        case this.mapaPalacioCocina2:
+          this.rutaImgInteractuables = '/images/columna-izquierda/palacio/interactuables/squirrel.png';
+          this.textoInteractivo = this.textosInteractivosCocina2[2]
+          break;
+        case this.mapaPalacioDormitorio:
+          this.rutaImgInteractuables = '';
+          this.textoInteractivo = this.textosInteractivosPalacio[0]
+          break;
+      }
+    }
+    console.log ('rutaImgInteractuables: ' + this.rutaImgInteractuables)
   }
   cerarDiv(){
     this.currentPage = 0

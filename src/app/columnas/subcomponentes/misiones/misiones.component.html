@@ -1,6 +1,6 @@
 <div class="paginador-container">
   <div class="div-superior">
-    <button (click)=" currentPage = (currentPage - 1)" [disabled]="currentPage === 0" class="botones-paginacion">{{ "<<" }}
+    <button (click)=" currentPage = (currentPage - 1)" [disabled]="currentPage === 0" class="botones-paginacion"><b>{{ "<<" }}</b>
     </button>
 
     <ul class="pagination"> 
@@ -13,7 +13,7 @@
       </ng-container>      
     </ul>
 
-    <button (click)="currentPage = (currentPage + 1)" [disabled]="currentPage === tituloMision.length - 1" class="botones-paginacion">{{ ">>" }}</button>
+    <button (click)="currentPage = (currentPage + 1)" [disabled]="currentPage === tituloMision.length - 1" class="botones-paginacion"><b>{{ ">>" }}</b></button>
 
     <button (click)="inputShowUp()" class="boton-mas-misiones">Crear misión</button> <!-- Botón para añadir una nueva misión -->
     <div *ngIf="inputVisible" class="crear-misiones">

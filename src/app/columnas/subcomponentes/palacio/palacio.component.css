@@ -20,20 +20,14 @@
   padding: 0;
 }
 
-.pagination button.active {
-  border: 5px;
-  border-color: beige;
-}
-
 .div-palacio {
-  background-color: rgba(237, 235, 207, 0.5);
+  background-color: rgba(237, 235, 207, 0.8);
   word-wrap: break-word; /* Hace que el texto se ajuste a la línea */
   white-space: pre-line; /* Permite que el texto envuelva normalmente */
   display: flex;
   position: absolute;
   background-size: cover;
   background-position: center;
-  flex-direction: column; /* Alinea los elementos verticalmente */
   justify-content: flex-start; /* Alinea el contenido al principio verticalmente */
   height: 50vh;
   width: 40vw;
@@ -43,12 +37,13 @@
   border-color: black; 
   border-style: groove;   
   box-sizing: border-box; /* Incluye padding y borde dentro del tamaño total */
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: grey black;
   user-select: none;
-  font-weight: bold;
-  padding: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .resaltar-boton {
@@ -67,9 +62,9 @@
   overflow: visible;
 }
 
-button:hover .resaltar-boton {
+/* button:hover .resaltar-boton {
   visibility: visible;
-}
+} */
 
 .X {
   background-color: brown;
@@ -82,43 +77,113 @@ button:hover .resaltar-boton {
   right: 0%;
   text-align: center;
   margin-right: 10px;
+  z-index: 5;
 }
 
-.b1 {
+.b1 { 
   background-color: aquamarine;
   background-size: contain;
   color: white;
   width: 250px;
-  height: 350px;  
+  height: 250px;  
 }
-.b1A{
+
+.b1A{ /* palacio */
   background-image: url('/images/columna-izquierda/palacio/interactuables/tools.png');
   transform: translate(23vw, 35vh);
+  width: 250px;
+  height: 220px;  
 }
-.b1B{
+.b1B{ /* cocina1 */
+  background-image: url('/images/columna-izquierda/palacio/interactuables/smoked-meat.png');
+  transform: translate(35vw, 5vh);
+  width: 115px;
+  height: 220px; 
+}
+.b1C{ /* cocina2 */
+  background-image: url('/images/columna-izquierda/palacio/interactuables/frutos-secos.png');
+  transform: translate(11vw, 57.5vh);
+  width: 75px;
+  height: 45px; 
+}
+.b1D{  /* dormitorio */
+  display: none;
+}
 
+.b1E{  /* estrellas */
+  display: none;
 }
-.b1C{
-  
-}
-.b1D{
-  
-}
-
-
 .b2 {
-  background-image: url('/images/t2.png');
+  background-color: rgb(178, 127, 255);
   background-size: contain;
-  transform: translate(0%, 0%);
   color: white;
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;  
 } 
+.b2A{
+  background-image: url('/images/columna-izquierda/palacio/interactuables/hide.png');
+  transform: translate(47vw, 60vh);
+  width: 300px;
+  height: 165px;  
+}
+.b2B{
+  background-image: url('/images/columna-izquierda/palacio/interactuables/stone-plate.png');
+  transform: translate(43vw, 55vh);
+  width: 200px;
+  height: 85px;    
+}
+.b2C{
+  background-image: url('/images/columna-izquierda/palacio/interactuables/dry-mushrooms.png');
+  transform: translate(33vw, 42.5vh);
+  width: 82px;
+  height: 35px;  
+}
+.b2D {
+  display: none;
+}
+.b2E {
+  display: none;
+}
+
 .b3 {
-  background-image: url('/images/t3.png');
-  transform: translate(0%, 180%);
+  background-color: rgb(255, 202, 127);
   background-size: contain;
   color: white;
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;  
+}
+.b3A {
+  display: none;
+}
+.b3B {
+  display: none;
+}
+.b3C {
+  background-image: url('/images/columna-izquierda/palacio/interactuables/squirrel.png');
+  transform: translate(22vw, 51vh);
+  width: 65px;
+  height: 75px; 
+}
+.b3D {
+  display: none;
+}
+.b3E {
+  display: none;
+}
+
+.div-bg-interactivo{
+  width: calc(100% - 20px);
+  height: calc(100% - 10px);
+  background-size: contain;
+  background-position: center;
+  position: absolute;
+  background-repeat: no-repeat;
+  opacity: 0.6; 
+}
+
+.texto-interactivo{
+  z-index: 2;
+  margin: 15px;
+  font-size: 18px;
+  text-shadow: 0px 0px 5px rgba(237, 235, 207, 1);
 }
