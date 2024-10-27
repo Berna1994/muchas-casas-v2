@@ -10,7 +10,7 @@ export class MisionesService {
   private _diasDeViaje: string[] = ['8-10',];
   private _mision: string[] = [
     `
-    Ërtong Alaklamcubor fue enviada junto a los mercaderes que traen bisin para llegar a las tierras de la gente que produce queso y comerciar unos objetos de valor a cambio de productos exóticos e información. Además de los mercaderes, viaja con una escolta escoltada por algunos enanos asignados por Etagok.
+    Ërtong Alaklamcubor fue enviada junto a los mercaderes que traen bisin para llegar a las tierras de la gente que produce queso y comerciar unos objetos de valor a cambio de productos exóticos e información. Además de los mercaderes, viaja con una escolta escoltada por algunos enanos asignados por Etägók.
     Objetos de valor: 
     
     - 1 riñón de licor extranjero muy grande.

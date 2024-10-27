@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
-import { InformesComponent } from './subcomponentes/informes/informes.component';
-import { MisionesComponent } from './subcomponentes/misiones/misiones.component';
-import { HistoriaComponent } from './subcomponentes/historia/historia.component';
-import { PersonajesComponent } from './subcomponentes/personajes/personajes.component';
-import { MundoComponent } from './subcomponentes/mundo/mundo.component';
-import { PalacioComponent } from './subcomponentes/palacio/palacio.component';
+import { Component, ViewChild} from '@angular/core';
+import { InformesComponent } from './columna izquierda/informes/informes.component';
+import { MisionesComponent } from './columna izquierda/misiones/misiones.component';
+import { HistoriaComponent } from './columna izquierda/historia/historia.component';
+import { PersonajesComponent } from './columna izquierda/personajes/personajes.component';
+import { MundoComponent } from './mapas/mundo/mundo.component';
+import { PalacioComponent } from './mapas/palacio/palacio.component';
 import { ImagenGiftAntorchasComponent } from './gift-antorchas/gift-antorchas.component';
 import { PajaritoComponent } from './pajarito/pajarito.component';
-import { EstrellasComponent } from './subcomponentes/estrellas/estrellas.component';
+import { EstrellasComponent } from './mapas/estrellas/estrellas.component';
 import { MapasActivosService } from '../../../public/services/mapas-activos.service';
 
 
@@ -30,6 +30,7 @@ import { MapasActivosService } from '../../../public/services/mapas-activos.serv
 })
 export class ColumnasComponent {
 
+  @ViewChild(InformesComponent) informesComponent!: InformesComponent;
   isDivVisible: boolean = false;
   get divVisible(): boolean {return this.isDivVisible;} // esto es para acceder a isDivVIsible desde otro componente
   claseBackgroundIzq: string = 'clase-background-izq';
@@ -39,6 +40,7 @@ export class ColumnasComponent {
   botDerActivo = true
   botBajoActivo = true
  
+
   constructor(private mapasActivosService: MapasActivosService) {}
   
   menuPrincipal = true
@@ -53,13 +55,13 @@ export class ColumnasComponent {
   currentComponent: any; // se usa para saber cual componente mostrar en la ventana izq
 
   actualizarBotonesActivos() {
-    console.log(' cocina1: ' + this.mapasActivosService.mapaPalacioCocina1 + '\n' +
+ /*    console.log(' cocina1: ' + this.mapasActivosService.mapaPalacioCocina1 + '\n' +
       ' mapa palacio: ' + this.mapasActivosService.mapaPalacio + '\n' + 
       ' cocina 2: ' + this.mapasActivosService.mapaPalacioCocina2 + '\n' +
       ' dormitorios: ' + this.mapasActivosService.mapaPalacioDormitorio + '\n' + 
       ' menu principal: ' + this.menuPrincipal + '\n' +
       ' estrellas: ' + this.mapasActivosService.mapaEstrellas
-    )
+    ) */
     if (this.menuPrincipal) {
       this.botIzqActivo = true;
       this.botDerActivo = true;
@@ -129,6 +131,7 @@ export class ColumnasComponent {
     else {this.isDivVisible = true}
     this.contadorBotones = 1
     // fin funcion ...
+
     this.claseBackgroundIzq = 'clase-informes';
     if (this.isDivVisible === true){
       document.body.style.backgroundImage = "url('/images/columna-izquierda/background-informes.png')";
@@ -142,6 +145,7 @@ export class ColumnasComponent {
       this.backtoMenu()
     }
     this.currentComponent = InformesComponent
+    console.log ("se clikeo informes")
   }
 
   clickMisiones (){

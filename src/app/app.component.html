@@ -1,3 +1,4 @@
+
 <!-- Cambio de prueva rama -->
 <div class="div-banner-columnas">
 
@@ -24,7 +25,7 @@
 <div class="div-turnos" *ngIf="verDivTurnos">
   <p>Te preparas para descansar luego de un largo dia</p>
 
-  <button class="boton-dormir" (click)="booleanDivTurnos(); booleanDivTurnos2(); dialogosPasarTurno();" (click)="incrementarContador()">Dormir</button> 
+  <button class="boton-dormir" (click)="booleanDivTurnos(); booleanDivTurnos2(); dialogosPasarTurno();" (click)="incrementarContador();" >Dormir</button> 
 
   <button class="boton-cancelar" (click)="booleanDivTurnos()">Cancelar</button>
 </div>
@@ -47,9 +48,14 @@
         {{no}}</button>
     </div>
 
-    <button (click)="contadorDeClicks();" class="mover-boton-derecha" style="font-size: 16px;" *ngIf="!verBotonesIntTurnos">
+    <button (click)="contadorDeClicks();" class="mover-boton-derecha" *ngIf="!verBotonesIntTurnos">
       siguiente
     </button>
 
   </div>
 </div>
+
+
+
+
+

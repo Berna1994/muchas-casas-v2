@@ -1,0 +1,97 @@
+.div-de-todo-el-contenido-de-la-app-informes {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Asegura que el contenedor ocupe todo el espacio del padre */
+}
+
+.paginador-container {
+  width: 100%; /* El ancho completo del contenedor */
+  flex-shrink: 0; /* Evita que este div crezca o se encoja, mantiene su altura */
+}
+
+.pagination {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.pagination-li-top {
+  flex: 1; /* Hace que todos los elementos <li> crezcan igual */
+  width: 100%;
+}
+
+.pagination button {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(205, 179, 162);
+  border: 2px solid black; 
+  border-style: outset;
+  box-sizing: border-box;
+}
+
+.pagination button.active {
+  font-weight: bold;
+  background-color: #c7956c;
+}
+
+.div-pantalla-informes {
+  flex-grow: 1; /* Ocupa el espacio restante del contenedor */
+  overflow: hidden; /* Evita que el contenido salga fuera del contenedor */
+  display: flex;
+}
+
+.div-noticias {
+  display: flex;
+  flex-grow: 1;
+}
+
+.padding-texto {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Asegura que ocupe el espacio restante */
+}
+
+.columna-botones-izq {
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: rgba(142, 111, 92, 0.3);
+}
+
+.selectOption{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden
+}
+
+.ul-opciones-respuestas-dialogos {
+  justify-content: center; /* Centra los botones verticalmente */
+  padding: 0; /* Elimina el padding del ul */
+  margin: 0; /* Elimina el margen del ul */
+  margin-top: 20px;
+}
+
+.div-opciones-respuestas-dialogos{
+  align-self: center;
+  align-content: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.div-opciones-respuestas-dialogos button {
+  background-color: #e7c6b75e;
+  padding: 3px; /* Espacio interno en el botón */
+  margin: 1px 0; /* Espacio entre los botones */
+  text-align: center;
+  width: auto; /* Ancho automático para ajustar al texto */
+  cursor: pointer;
+}
+
+.div-columna-derecha{
+  flex-direction: row;
+  overflow-y: auto;
+}

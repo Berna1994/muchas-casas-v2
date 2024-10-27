@@ -1,8 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ColumnasComponent } from './columnas/columnas.component';
 import { CommonModule } from '@angular/common';
 import {ContadorService} from '../../public/services/contador-dias.service';
+import { NotificacionesService } from '../../public/services/notificaciones.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {ContadorService} from '../../public/services/contador-dias.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   
   title = 'muchasCasas2';
   //boton prologo
@@ -44,6 +45,19 @@ export class AppComponent {
   //cosa para acceder a una variable del comp hijo
   @ViewChild(ColumnasComponent, { static: true }) columnasComponent!: ColumnasComponent;
 
+
+
+
+
+
+
+
+
+
+
+  console(){
+    console.log("noticiasDisponibles-interatuable: " )
+  }
 
   //arrays respuestas turnos
   arrayRespuestasAcostarce = [
@@ -117,7 +131,6 @@ export class AppComponent {
     if (this.listaNetadeArrays[this.varContadorDeClicks] === "interaccionDespertarce" ){
       this.interaccionDespertarce();  
     }
-    
          
   }
     
@@ -341,20 +354,30 @@ export class AppComponent {
       };
 
   //----------------FIN DIALOGOS-------------------------------------
-    
-  constructor(private contadorService: ContadorService) {}
+
+
+  // ------------------------ notificaciones -----------------------------------------------
+  constructor (private contadorService: ContadorService, public notificacionesService: NotificacionesService) {}
 
   incrementarContador(): void {
-    this.contadorService.incrementar();
+    this.contadorService.incrementar(); // cambia el valor del dia actual +1
+    this.notificacionesService.actualizarNotificaciones(); // se actualizan las notificaciones al pasar de dia
   }
 
-  obtenerContador(): number {
-    return this.contadorService.getValor();
+  ngOnInit(): void { //se actualizan las notificaciones al iniciar el programa
+    this.notificacionesService.actualizarNotificaciones()
+
+    this.notificacionesService.generarArraysDeHistoriales() // Generar los arrays dinámicos de historiales
+
+    // Esto asegura que el servicio notificaciones sea utilizado
+    console.log("Servicio NotificacionesService inyectado y ejecutando ngOnInit");
+    this.notificacionesService.fakengOninit()
+
   }
+
 }
 
 
-  
 
 
 

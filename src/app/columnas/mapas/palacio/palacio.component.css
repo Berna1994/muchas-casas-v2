@@ -107,7 +107,12 @@
   height: 45px; 
 }
 .b1D{  /* dormitorio */
-  display: none;
+  background-image: url('/images/columna-izquierda/palacio/interactuables/mug.png');
+  position: absolute;
+  top: 377px; 
+  left: 1045px;
+  width: 50px;
+  height: 105px; 
 }
 
 .b1E{  /* estrellas */
