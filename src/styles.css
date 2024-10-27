@@ -10,7 +10,7 @@ body {
     background-size: 100% 100%; /* Ancho completo del contenedor, altura extendida al 120% */
     background-position: center bottom; /* Centra horizontalmente y alinea al fondo verticalmente */
     background-repeat: no-repeat;
-    background-color: rgb(45, 34, 0);
+    background-color: black;
     margin: 0;
     padding: 0;  
   }
@@ -33,6 +33,7 @@ app-root {
 }
 app-informes{ /*  no se si esto devo escribirlo aca o en otro css */
   width: 100%;
+  height: 100%; /* (este lo agrego por el formato que le puse) */
 }
 app-historia{ /*  no se si esto devo escribirlo aca o en otro css */
   width: 100%;

@@ -141,7 +141,6 @@
     border-color: black; 
     border-style: groove;   
     box-sizing: border-box; /* Incluye padding y borde dentro del tamaño total */
-    overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: grey black;
     user-select: none;

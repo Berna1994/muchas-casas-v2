@@ -11,7 +11,7 @@ import { MapasActivosService } from '../../../../../public/services/mapas-activo
 
 })
 export class PalacioComponent {
-  currentPage: number = 0;
+  currentPage: number = 0;  //indica a cual de los 3 botones se refiere
   totalPages: number = 3;
   rutaImgInteractuables: string = "no-string";
   textoInteractivo: string = "no-string"
@@ -53,7 +53,17 @@ export class PalacioComponent {
     Aunque las ardillas, comadrejas, ratones y demas pequeños mamiferos son mascotas muy populares entre los niños, no suelen retenerlas por mucho tiempo cuando se les dice que a partir de ahora toda su comida sera para la pequeña criatura si no la hechan del hogar.`,
   ];
   textosInteractivosDormitorio: string[] = [
-    `Texto 1`, 
+    `"Aveces cuando bebo una infusion aqui en este cuarto, recuerdo esas palabras...
+    
+    La montaña llorando sangre sobre casas destruidas,
+    Forastero soplando hambre en la tierra,
+    Pieles rojas lanzando niños sobre dos pilares."
+
+    [hace una pausa]
+
+    "Quizas sea porque aqui fue donde el Gran Sabio dio su ultimo suspiro junto a mí, y aún oigo sus palabras.
+    
+    De cualquier forma, el aroma a hiervas calientes mezclado con el olor a bisin que aun desprende este cuerno siempre me traen nostalgia." `, 
     `Texto 2`,
   ];
   
@@ -72,7 +82,7 @@ export class PalacioComponent {
     `,
     `Es la montaña blanca, madre de todos nosotros. 
     Siendo la montaña mas alta puede ser vista a lo lejos desde Muchas Casas si subes por encima de  los arboles y colinas circundantes. El paisaje desde las tierras altas de muchas casas esta separado por una enorme llanura boscosa hasta la solitaria cima nevada.
-    Alli viajo uno de los hermanos de Etagok y posiblemente vive en el pueblo vecino. 
+    Alli viajo uno de los hermanos de Etägók y posiblemente vive en el pueblo vecino. 
     Como Lam-Tolis, es tambien una montaña sagrada y no es raro ver gente llendo a peregrinar alli para pedir por sanacion y muchos hijos. Sin embargo has oido muy pocas veces de algun visitante de esas tierras que haya pasado por Muchas Casas.
     `,
     `Una laguna escondida en un valle al que se llega a traves de un sendero entre las montañas, famosa por estar llena de deliciosas almejas y ser un excelente terreno de caza. Se dice que en el lago vive la misteriosa mujer-ciervo Kizbiz-Aral, pero muchos afirman que no existe o que se fue hace mucho tiempo.
@@ -129,7 +139,7 @@ export class PalacioComponent {
       console.log ("currentPage:_" + this.currentPage)
     }
 
-    if (this.currentPage === 1) {
+    if (this.currentPage === 1) { 
       switch (true) {
         case this.mapaPalacio:
           this.rutaImgInteractuables = '/images/columna-izquierda/palacio/interactuables/tools.png';
@@ -144,8 +154,8 @@ export class PalacioComponent {
           this.textoInteractivo = this.textosInteractivosCocina2[0]
           break;
         case this.mapaPalacioDormitorio:
-          this.rutaImgInteractuables = '';
-          this.textoInteractivo = this.textosInteractivosPalacio[0]
+          this.rutaImgInteractuables = '/images/columna-izquierda/palacio/interactuables/mug.png';
+          this.textoInteractivo = this.textosInteractivosDormitorio[0]
           break;
       }
     }
@@ -195,5 +205,10 @@ export class PalacioComponent {
     this.currentPage = 0
   }
 
-  
+ 
+
+
+
+
+
 }

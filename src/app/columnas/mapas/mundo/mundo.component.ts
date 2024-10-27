@@ -25,7 +25,7 @@ export class MundoComponent {
     `,
     `Es la montaña blanca, madre de todos nosotros. 
     Siendo la montaña mas alta puede ser vista a lo lejos desde Muchas Casas si subes por encima de  los arboles y colinas circundantes. El paisaje desde las tierras altas de muchas casas esta separado por una enorme llanura boscosa hasta la solitaria cima nevada.
-    Alli viajo uno de los hermanos de Etagok y posiblemente vive en el pueblo vecino. 
+    Alli viajo uno de los hermanos de Etägók y posiblemente vive en el pueblo vecino. 
     Como Lam-Tolis, es tambien una montaña sagrada y no es raro ver gente llendo a peregrinar alli para pedir por sanacion y muchos hijos. Sin embargo has oido muy pocas veces de algun visitante de esas tierras que haya pasado por Muchas Casas.
     `,
     `Una laguna escondida en un valle al que se llega a traves de un sendero entre las montañas, famosa por estar llena de deliciosas almejas y ser un excelente terreno de caza. Se dice que en el lago vive la misteriosa mujer-ciervo Kizbiz-Aral, pero muchos afirman que no existe o que se fue hace mucho tiempo.
@@ -49,15 +49,16 @@ export class MundoComponent {
   subTituloMapa: string[] = [
     `[Shàmman-Zoden]
     `,
-    `[8-10 dias de viaje siguiendo el rio en direccion a Anrizudar]
+    `[5-6 dias de viaje siguiendo el rio en direccion a Anrizudar]
     `,
-    `[4-5 dias de viaje en direccion a la cima blanca de Volal Tolis]
+    `[3-4 dias de viaje en direccion a la cima blanca de Volal Tolis]
     `,
-    `[5-7 dias de viaje a traves del pazo de las montañas en direccion a Uvel-Idar]
+    `[5-6 dias de viaje a traves del pazo de las montañas en direccion a Uvel-Idar]
     `,
     `[2 dias de viaje en llendo al oscuro bosque de Shàmman-Fotthor]
     `,
   ];
+ 
 
   goToPage(page: number): void {
     if (page > 0 && page <= this.totalPages) {

@@ -1,0 +1,93 @@
+<div class="div-de-todo-el-contenido-de-la-app-informes" style="height: inherit;">
+
+
+  <div class="paginador-container">  <!-- BOTONES SUPERIORES -->
+    <ul class="pagination">
+      <li class="pagination-li-top"><button (click)="goToPage(1)" [class.active]="currentPage === 1">Noticias</button></li>
+      <li class="pagination-li-top"><button (click)="goToPage(2)" [class.active]="currentPage === 2">Proyectos</button></li>
+      <li class="pagination-li-top"><button (click)="goToPage(3)" [class.active]="currentPage === 3">Recursos</button></li>
+    </ul>
+  </div>
+
+  <div class="div-pantalla-informes"> <!-- PANTALLA informes -->
+
+    <div class="div-noticias" *ngIf="currentPage === 1"> 
+
+      <ul class="pagination columna-botones-izq"> <!-- seleccion botones columna izquierda -->
+        <ng-container  *ngFor="let titulo of notificacionesService.notificacionesVisibles; let i = index">
+          <li >
+            <button style="width: 120px;" (click)="notificacionesService.currentPageNoticia = i" (click)="clickPaginadorNoticias(i)" [class.active]="notificacionesService.currentPageNoticia === i">
+              {{ notificacionesService.notificacionesVisibles[i].titulo }}
+            </button>
+          </li>
+        </ng-container>      
+      </ul>
+      
+      <div class="div-columna-derecha"> <!--  ventana de textos de notificaciones-->
+
+        <h2 style="text-align: center; text-decoration: underline;">   <!-- titulo noticia -->
+          {{notificacionesService.notificacionesVisibles[notificacionesService.currentPageNoticia].titulo}}
+        </h2>
+
+        <div class="padding-texto" >   <!-- todo lo que esta debajo del titulo -->      
+
+              <!-- historial dialogo -->
+          <ng-container >  
+            <ng-container *ngFor="let objeto of notificacionesService.arrayHistorialesDeCadaNoticia">
+              <ng-container *ngIf="objeto.colorPrimario === notificacionesService.colorActivoPrimario">
+                <div *ngFor="let item of objeto.items">
+                  <p class="p1">{{ item.conversacion }}</p>
+                  <hr style="border: 2px dashed rgb(145, 124, 99);">
+                  <p class="p2">{{ item.respuestas }}</p>
+                  <hr style="border: 1px solid rgba(98, 29, 29, 0.618);">
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+              <!-- div dialogoActivo --> 
+          <div class="div-dialogo-activo" style="height: inherit;" 
+          *ngIf="(this.notificacionesService.interrumpirDialogo === false && this.notificacionesService.finDialogosBoolean === false) || this.notificacionesService.finDialogosValueN === 0">    
+            {{this.notificacionesService.dialogoActivo}}
+          </div>
+
+            <!--  div seleccion respuestas  -->
+          <ng-container class="div-seleccion-respuestas"> 
+
+            <div class="selector" *ngIf="this.notificacionesService.finDialogosBoolean === false && this.notificacionesService.interrumpirDialogo === false">    <!-- /*/* div conversacion activa /*/*--> 
+            
+              
+              <ul class="ul-opciones-respuestas-dialogos" style="display: flex; flex-direction: column;">
+                <div class="div-opciones-respuestas-dialogos">
+                  <ng-container                    
+                  *ngFor="let opcionRespuesta of notificacionesService.respuestasVisibles; let i = index">
+                  
+                    <button (click)="switchRespuestaSeleccionada(opcionRespuesta); clickContinuar(opcionRespuesta)">
+                      {{ opcionRespuesta }}
+                    </button>
+                  </ng-container>
+                </div>
+              </ul>            
+            </div>
+             
+          </ng-container>
+          
+        </div>
+      </div>
+    </div>
+
+  <div *ngIf="currentPage === 2" style="white-space: pre-wrap;"> <!--PANTALLA proyectos -->
+      <h3>{{proyectos[0]}}</h3>
+      <h4>{{proyectos[1]}}</h4>
+      {{proyectos[2]}}
+      <hr style="border-color: black;">
+      <h3>{{proyectos[3]}}</h3>
+      <h4>{{proyectos[4]}}</h4>
+      {{proyectos[5]}}
+  </div>
+
+  <div *ngIf="currentPage === 3"> <!--PANTALLA recursos -->
+      {{recursos[0]}}
+  </div>
+    
+</div>
