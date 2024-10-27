@@ -1,3 +1,16 @@
+eventos e interacciones:
+
+-se actualizo el color de background del body a negro
+-se cambio el color del png de canario solar a amarillo
+-se actualizo el tiempo de viaje entre lugares del mapa
+-se actualizo la ubicacion de algunas carpetas de modulo
+-se actualizo la interfaz y funcionamiento de la ventana de notificaciones
+-Se agrego un nuevo servicio "notificaciones"
+-se agregaron notificaciones emergentes cuando llega cierto dia
+-se agrego una taza interactuable en el cuarto del palacio
+-se agrego el sistema de interacciones en la ventana de noticias
+
+
 # MuchasCasas2
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
