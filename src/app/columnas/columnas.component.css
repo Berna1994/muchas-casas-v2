@@ -9,7 +9,7 @@
     height: 18%;
     background-image: url('/images/columna-izquierda/cuero.png'); 
     opacity: 1; 
-    color: rgb(233, 185, 165);
+    color: rgb(215, 175, 166);
     text-shadow: 2px 1px 2px black;
     font-size: large;
     background-size: 100% 100%;
@@ -145,6 +145,7 @@
     scrollbar-color: grey black;
     user-select: none;
     font-weight: bold;
+    overflow-y: hidden;
   }
   .active-ventana-izq {
     width: calc(100% - 40vh);

@@ -16,7 +16,7 @@
       <ul class="pagination columna-botones-izq"> <!-- seleccion botones columna izquierda -->
         <ng-container  *ngFor="let titulo of notificacionesService.notificacionesVisibles; let i = index">
           <li >
-            <button style="width: 120px;" (click)="notificacionesService.currentPageNoticia = i" (click)="clickPaginadorNoticias(i)" [class.active]="notificacionesService.currentPageNoticia === i">
+            <button class="botones-titulos-secundarios" style="width: 120px;" (click)="notificacionesService.currentPageNoticia = i" (click)="clickPaginadorNoticias(i)" [class.active]="notificacionesService.currentPageNoticia === i">
               {{ notificacionesService.notificacionesVisibles[i].titulo }}
             </button>
           </li>
@@ -55,9 +55,8 @@
           <ng-container class="div-seleccion-respuestas"> 
 
             <div class="selector" *ngIf="this.notificacionesService.finDialogosBoolean === false && this.notificacionesService.interrumpirDialogo === false">    <!-- /*/* div conversacion activa /*/*--> 
-            
               
-              <ul class="ul-opciones-respuestas-dialogos" style="display: flex; flex-direction: column;">
+              <ul class="ul-opciones-respuestas-dialogos">
                 <div class="div-opciones-respuestas-dialogos">
                   <ng-container                    
                   *ngFor="let opcionRespuesta of notificacionesService.respuestasVisibles; let i = index">
@@ -76,14 +75,24 @@
       </div>
     </div>
 
-  <div *ngIf="currentPage === 2" style="white-space: pre-wrap;"> <!--PANTALLA proyectos -->
-      <h3>{{proyectos[0]}}</h3>
-      <h4>{{proyectos[1]}}</h4>
-      {{proyectos[2]}}
-      <hr style="border-color: black;">
-      <h3>{{proyectos[3]}}</h3>
-      <h4>{{proyectos[4]}}</h4>
-      {{proyectos[5]}}
+  <div *ngIf="currentPage === 2" class="padding-texto"> <!--PANTALLA proyectos -->
+
+    <ul class="ul-barra-superior">
+      <ng-container *ngFor="let item of proyectos; let i = index" class="contenedor-botones-proyectos">
+        <li>
+          <button class="botones-titulos-secundarios" (click)="actualizarindiceProyectos(i)"
+          [class.active]="indiceProyectos === i"
+          >{{item.titulo}}</button>
+        </li>
+      </ng-container>
+    </ul>
+
+    <div class="texto-proyectos">
+      <h3 class="titulo-proyectos">{{ proyectos[indiceProyectos].titulo }}:</h3>
+      <p>{{ proyectos[indiceProyectos].descripcion }}</p>
+      <p style="padding-top: 15px;">{{ proyectos[indiceProyectos].informe }}</p>
+    </div>
+
   </div>
 
   <div *ngIf="currentPage === 3"> <!--PANTALLA recursos -->

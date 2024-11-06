@@ -5,53 +5,69 @@ import { ContadorService } from './contador-dias.service';
   providedIn: 'root'
 })
 export class NotificacionesService {
-
-  public notificacionesVisibles: any[] = [];
-  public respuestasVisibles: string[] = [];
-  public arrayHistorialesDeCadaNoticia: any[] = [];
+  
+  notificacionesVisibles: any[] = [];
+  respuestasVisibles: string[] = [];
+  noticiasDisponibles: any[] = []; // es una copia de notificacionesVisibles que se usa para no alterar el array original // se deve Inicializar vacío y se actualiza en el app.component.ts cuando se pasa de turno
+  arrayHistorialesDeCadaNoticia: any[] = [];
   N: number = 1 /* no poner 0 */
   ID = ""
   colorActivoPrimario: string = "aun no definido"
   colorActivoSecundario: string = "aun no definido"
   conversacion: string = "aun no definido"
   currentPageNoticia: number = 0; // Para seleccionar noticias con los botones
-  noticiasDisponibles: any[] = []; // Inicializar vacío y se actualiza en el app.component.ts cuando se pasa de turno
+ 
   dialogoActivo: string = "aun no definido"
   textoLargoSeleccionado = 'aun no definido';
-  finDialogosBoolean: boolean = false
   finDialogosValueN: number = 0
-  interrumpirDialogo: boolean = false
+  finDialogosBoolean: boolean = false   /* esto se usa para despaarecer los dialogos de respuestas si no hay mas dialogos disponibles, ya que de lo contrario se estanca en el ultimo dialogo que hubo */
+  interrumpirDialogo: boolean = false   /* esto se usa para despaarecer los dialogos de respuestas si se llega a uno -EMPTY- */
+  noticiaSinVer: boolean = true
+  noticiasSinResponder: boolean = false
+
+  arrayColoresPSinVer: any [] = []
+  CopiaElementosOcultos: any [] = []
+  arrayDialogosSinTerminar: any [] = []
+  todasNoticiasVistas: boolean = true
+
+  dialogoIrADormir: string = "Te preparas para descansar luego de un largo día"
+
+
   /*  LOS "COLORES" EN LOS ARRAYS SON LA FORMA EN QUE LLAMO A LOS CODIGOS UNICOS DE IDENTIFICACION */
 
 
   private noticias = [
-    {dia: 0, 
+    {día: 0, 
       semana: 1, 
       finDialogos: 0, 
+      interaccionTerminada: false,
       titulo: `Se marchan los emisarios`, 
       colorPrimario: 'd0-s1-smle',
       texto: `Se retiran los dos hombres de Shàmman Shàmman Zoden (muchas, muchas casas), que se presentaron ante ti como como viajeros de esta tribu. 
       
       Te relaja saber que ya no estaran molestandote pidientote mas favores como si fueran el propio Lam-Tolis encarnado, sin embargote han quedado dudas hacerca de su execiva "curiosidad" haciendote preguntas.`},
 
-    {dia: 1, 
+    {día: 1, 
       semana: 1, 
       finDialogos: 3,
+      interaccionTerminada: false,
       titulo: `Un conocindo vino a verte!`,
       colorPrimario: `d1-s1-ucvav`, 
       texto: `Öntak Luror (brazo cruel), el nuevo líder de la tribu del pantano con quien luchaste un duelo justo, ha venido a verte. 
       Se presenta ante ti con 3 hombres que lo acompañan.`},
 
-    {dia: 2, 
+    {día: 2, 
       semana: 1, 
       finDialogos: 0, 
+      interaccionTerminada: false,
       titulo: `Rumores de la boda`, 
       colorPrimario: 'd2-s1-rdlb', 
       texto: `Has escuchado cotillear a las mujeres ancianas mas de una vez sobre una supuesta boda entre ti y `},
     
-    {dia: 3, 
+    {día: 3, 
       semana: 1, 
       finDialogos: 3,
+      interaccionTerminada: false,
       titulo: `Druida desaparecido`,
       colorPrimario: 'd1-s1-dd', 
       texto: `Namàsh Inrus (el personaje del Satu, druida-alcoholico-alquimista de dudosas posiones), se a marchado y no sabes mucho sobre el desde hace dias.`},
@@ -85,7 +101,7 @@ export class NotificacionesService {
           textoLargo: `"Si necesitaba ayuda me lo hubiera dicho. Solo espero que esto no cause problemas, los chamanes son un poco impredecibles."` 
         },
         { colorSecundario: `mision`, 
-          textoCorto: `[Enviar a alguien a averiguar],`,
+          textoCorto: `[Enviar a alguien a averiguar]`,
           textoLargo: `[Puedes abrir la pestaña de misiones y crear una para enviar a alguien a ver en qué está metido Namàsh.]` 
         },
         { colorSecundario: `actuar`, 
@@ -105,8 +121,7 @@ export class NotificacionesService {
             dialogo: `
           "Ha Ha, menos mal que lo dices, ya estaba apunto de llevarmela al pantano!"
           [Muestra una fugaz sonriza y se saludan con un apretón de manos muy varonil]
-          "He traido unos obsequios para tu gente, quisiera darselos al Erar Sáram, podrias llevarme con él?"
-          `,
+          "He traido unos obsequios para tu gente, quisiera darselos al Erar Sáram, podrias llevarme con él?"`,
           } ,
           {colorSecundario: `agredir`,
             dialogo:`
@@ -202,11 +217,14 @@ export class NotificacionesService {
         { 
           colorSecundario: 'normal',
           dialogo: `[Öntak responde]
-          "El final de un Gran Sabio es siempre un momento muy duro en la vida de todos, Etägók. Lamento oir que las flores del pantano no sirvieran, incluso traje algunas mas por si aun seguia enfermo."
+          "El final de un Gran Sabio es siempre un momento muy duro en la vida de todos, Etägók. Lamento oir que las flores del pantano no te sirvieran, incluso traje algunas mas por si necesitabas mas."
+
           [Hace una pausa]
+
           "Ese jodido anciano si que era astuto he? ha ha nos engaño a todos!" [Dice con clara intencion de cambiar los animos]
           
           "Pero creo que hiso lo correcto, veo en tí a alguien de brazo fuerte y el corazon amable. Como una madre oso que proteje a sus cachorros, creo que tu tambien cuidaras a tu gente. Yo tambien soy nuevo en esto de ser el líder de la tribu, ojala pueda inspirarlos como tu lo haces."
+
           [Se pone de pie, seguido por sus acompañantes. Uno de ellos te ayuda a levantarte jalandote de la mano]
           "Bueno, creo que estos obsequios te pertenecen... Erar Sáaram.
           Y una cosa mas, quisiera pedirte el favor de hospedarme un tiempo con tu gente. Se que en el pasado nuestras tribus se hicieron mucho daño, pero te prometo que no quiero causar problemas."
@@ -249,7 +267,7 @@ export class NotificacionesService {
 
           Disculpa Etägók, pero el brujo de la cima me pidio que viniera. 
           No me lo vas a creer, pero un pajaro me hablo con su voz!, te lo juro. 
-          Ahora me está entrenando para un ritual, te parecerá broma pero la idea de venir a la cueva y quedarme dormido no fue mia, Litez me dijo que bebiera una medicina especial y tratara de dormir por un dia entero. Pero eso no es facil, ni siquiera para mi ha ha.
+          Ahora me está entrenando para un ritual, te parecerá broma pero la idea de venir a la cueva y quedarme dormido no fue mia, Litez me dijo que bebiera una medicina especial y tratara de dormir por un día entero. Pero eso no es facil, ni siquiera para mi ha ha.
           `
         },
         { colorSecundario: 'normal',
@@ -260,7 +278,7 @@ export class NotificacionesService {
 
           Lamento si te preocupaste por mí, pero el brujo de la cima me pidio que viniera. 
           No me lo vas a creer, pero un pajaro me hablo con su voz!, te lo juro. 
-          Ahora me está entrenando para un ritual, te parecerá broma pero la idea de venir a la cueva y quedarme dormido no fue mia, Litez me dijo que bebiera una medicina especial y tratara de dormir por un dia entero. Pero eso no es facil, ni siquiera para mi ha ha.
+          Ahora me está entrenando para un ritual, te parecerá broma pero la idea de venir a la cueva y quedarme dormido no fue mia, Litez me dijo que bebiera una medicina especial y tratara de dormir por un día entero. Pero eso no es facil, ni siquiera para mi ha ha.
           `
         },
         { colorSecundario: `agredir`,
@@ -270,7 +288,7 @@ export class NotificacionesService {
 
           El brujo de la cima me pidio que viniera. 
           No me lo vas a creer, pero un pajaro me hablo con su voz!, te lo juro. 
-          Ahora me está entrenando para un ritual, te parecerá broma pero la idea de venir a la cueva y quedarme dormido no fue mia, Litez me dijo que bebiera una medicina especial y tratara de dormir por un dia entero. Pero eso no es facil, ni siquiera para mi ha ha."
+          Ahora me está entrenando para un ritual, te parecerá broma pero la idea de venir a la cueva y quedarme dormido no fue mia, Litez me dijo que bebiera una medicina especial y tratara de dormir por un día entero. Pero eso no es facil, ni siquiera para mi ha ha."
           `
         },
       ]
@@ -333,14 +351,68 @@ export class NotificacionesService {
 
   constructor(private contadorService: ContadorService) {}
   
+
+  actualizarArrayColoresPSinVer(indicePagina: number){
+    console.log("se llamo actualizarArrayColoresPSinVer: ")
+    console.dir(this.arrayColoresPSinVer)
+    
+    const colorPrimarioSeleccionado = this.notificacionesVisibles[indicePagina].colorPrimario;
+    const indexColor = this.arrayColoresPSinVer.indexOf(colorPrimarioSeleccionado);
+
+    // Si el color está en coloresSinver, lo eliminamos
+    if (indexColor !== -1) {
+    this.arrayColoresPSinVer.splice(indexColor, 1);
+    }
+  }
+
+  funcionChekearNotificacionesVistas() {
+    console.log("se llamo a funcionChekearNotificacionesVistas")
+    
+    
+    /* primero chekamos que la antorcha informes este apagada */
+
+    if (this.noticiaSinVer || !this.CopiaElementosOcultos.includes('informes')){
+      this.todasNoticiasVistas = false
+      console.log("antorcha informes esta encendida, todasNoticiasVistas: " + this.todasNoticiasVistas)
+      return
+    }
+    /* luego chekeamos que se haya abierto la ventana de cada noticia disponible */
+    if (this.arrayColoresPSinVer.length > 0){
+      this.todasNoticiasVistas = false
+      console.log("hay noticias sin ver, todasNoticiasVistas: " + this.todasNoticiasVistas)
+      return
+    }
+    /* luego chekeamos que todas las interacciones ayan llegado a su fin si no hay opciones de dialogo visibles */
+   
+   if (this.noticiasDisponibles.some(noticia => !noticia.interaccionTerminada)) { // Usamos `some` para verificar si hay interacciones sin terminar
+    this.todasNoticiasVistas = false;
+    console.log("hay noticias sin interactuar, todasNoticiasVistas: " + this.todasNoticiasVistas);
+    return;
+  }
+
+    this.todasNoticiasVistas = true
+    console.log("no se encontraron notificaciones sin ver o interactuar, todasNoticiasVistas: " + this.todasNoticiasVistas)
   
+  }
+
+  funcionActualizarDialogoIrADormir(){
+    console.log("se llamo a funcionActualizarDialogoIrADormir, ademas todasNoticiasVistas: " + this.todasNoticiasVistas)
+    if(this.todasNoticiasVistas === true) {
+      this.dialogoIrADormir = "Te preparas para descansar luego de un largo día"
+    } else {
+      this.dialogoIrADormir = "Aún tienes noticias pendientes"
+    }
+  }
+
   // Función para actualizar las notificaciones visibles
   actualizarNotificaciones(): void {
     const contador = this.contadorService.getValor();  // Obtener el valor del contador
     
     this.noticias.forEach(noticia => {  // Actualiza las notificaciones visibles
-      if (noticia.dia <= contador && !this.notificacionesVisibles.includes(noticia)) {
+      if (noticia.día <= contador && !this.notificacionesVisibles.includes(noticia)) {
         this.notificacionesVisibles.push(noticia);
+        this.arrayColoresPSinVer.push(noticia.colorPrimario); /* esto es para chekear noticias sin interactuar */
+        this.noticiaSinVer = true /* esto es para las antorchas */
         }      
       }
     );
@@ -364,7 +436,7 @@ export class NotificacionesService {
     console.log("Array de noticias disponibles:");
     console.dir(this.noticiasDisponibles);
     
-    
+    this.actualizarArrayColoresPSinVer(0) /* esto es para chekear notificaciones sin interactuar */
   }
 
   obtenerNotificacionesVisibles(): any[] {
@@ -464,6 +536,7 @@ export class NotificacionesService {
         this.dialogoActivo = this.noticiasDisponibles[this.currentPageNoticia]?.texto || '';
         if (this.dialogoActivo === "-EMPTY-"){
           this.interrumpirDialogo = true
+          this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
           console.log("CASO 1 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
           return
         }    
@@ -508,6 +581,7 @@ export class NotificacionesService {
 
             if (this.dialogoActivo === "-EMPTY-"){
               this.interrumpirDialogo = true
+              this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
               console.log("CASO 2 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
               return
             }  
@@ -541,6 +615,7 @@ export class NotificacionesService {
           }
           if (elementB.dialogo === "-EMPTY-"){
             this.interrumpirDialogo = true
+            this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
             console.log("CASO 3 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
             return
           } 
@@ -559,6 +634,7 @@ export class NotificacionesService {
           
           if (elementB.dialogo === "-EMPTY-"){
             this.interrumpirDialogo = true
+            this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
             console.log("CASO 4 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
             return
           }    
@@ -609,9 +685,13 @@ export class NotificacionesService {
   }
 
   actualizarFinDialogos(){
+    console.log("se llamo actualizaar dialogos")
     this.finDialogosValueN = this.notificacionesVisibles[this.currentPageNoticia].finDialogos
     if (this.N > this.finDialogosValueN){
       this.finDialogosBoolean = true
+      this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
+      console.log("noticiasDisponibles: ")
+      console.dir(this.noticiasDisponibles)
     }
     else {
       this.finDialogosBoolean = false
@@ -619,10 +699,7 @@ export class NotificacionesService {
     console.log(" se llamo a actualizar finDialogosBoolean => " + this.finDialogosBoolean)
 
   }
-
-
-
-
+      
 
 
 }

@@ -10,6 +10,7 @@ import { ImagenGiftAntorchasComponent } from './gift-antorchas/gift-antorchas.co
 import { PajaritoComponent } from './pajarito/pajarito.component';
 import { EstrellasComponent } from './mapas/estrellas/estrellas.component';
 import { MapasActivosService } from '../../../public/services/mapas-activos.service';
+import { NotificacionesService } from '../../../public/services/notificaciones.service';
 
 
 @Component({
@@ -40,8 +41,11 @@ export class ColumnasComponent {
   botDerActivo = true
   botBajoActivo = true
  
-
-  constructor(private mapasActivosService: MapasActivosService) {}
+ 
+  constructor(
+    private mapasActivosService: MapasActivosService,
+    public notificacionesService: NotificacionesService
+  ) {}
   
   menuPrincipal = true
   ventanaIzq = false
@@ -55,13 +59,8 @@ export class ColumnasComponent {
   currentComponent: any; // se usa para saber cual componente mostrar en la ventana izq
 
   actualizarBotonesActivos() {
- /*    console.log(' cocina1: ' + this.mapasActivosService.mapaPalacioCocina1 + '\n' +
-      ' mapa palacio: ' + this.mapasActivosService.mapaPalacio + '\n' + 
-      ' cocina 2: ' + this.mapasActivosService.mapaPalacioCocina2 + '\n' +
-      ' dormitorios: ' + this.mapasActivosService.mapaPalacioDormitorio + '\n' + 
-      ' menu principal: ' + this.menuPrincipal + '\n' +
-      ' estrellas: ' + this.mapasActivosService.mapaEstrellas
-    ) */
+
+    
     if (this.menuPrincipal) {
       this.botIzqActivo = true;
       this.botDerActivo = true;
@@ -218,6 +217,7 @@ export class ColumnasComponent {
   ocultarElemento(elemento: string) {              // funcion para ocultar las ventanas izquierdas
     if (!this.elementosOcultos.includes(elemento)) {
       this.elementosOcultos.push(elemento);
+      this.notificacionesService.CopiaElementosOcultos.push(elemento); /* esto es para actualizar si hay notificaciones sin interactuar */
     }
   }
 
@@ -259,8 +259,9 @@ export class ColumnasComponent {
       this.ventanaIzq = false
       this.mapaMundo = false
       this.mapasActivosService.mapaPalacioCocina1 = false
-      this.mapasActivosService.mapaPalacio = true
+      this.mapasActivosService.mapaPalacioCocina2 = false
       this.mapasActivosService.mapaPalacioDormitorio = false
+      this.mapasActivosService.mapaPalacio = true
       this.mapasActivosService.mapaEstrellas = false
     } else {
       this.backtoMenu()
@@ -385,12 +386,12 @@ botEntreColumnas(event: MouseEvent){
     return           /* **** importante poner el return sino se activa el boton con 
                       la nueva pantalla como si hubiera clikeado devuelta **** */
   }
-/*****/
+  /*****/
   if (this.ventanaIzq === true){   
     console.log ("se desactivaroon los botones entre columnas") 
     return                                                          // OTRO MENU ACTIVO
   }
-/*****/
+  /*****/
   if (this.mapaMundo === true){                                 // MUNDO ACTIVO
 
       if (idBoton.id === "button-right") {
@@ -416,7 +417,7 @@ botEntreColumnas(event: MouseEvent){
       return
     }
     }
-/*****/   
+  /*****/   
   if (this.mapasActivosService.mapaPalacioCocina1 === true){              //COCINA1
 
     if (idBoton.id === "button-left") {
@@ -430,7 +431,7 @@ botEntreColumnas(event: MouseEvent){
       return
     }
     }
-/*****/                                                                //COCINA2
+  /*****/                                                                //COCINA2
   if (this.mapasActivosService.mapaPalacioCocina2 === true){                                 
 
     if (idBoton.id === "button-left") {
@@ -444,7 +445,7 @@ botEntreColumnas(event: MouseEvent){
       return
     }
     }
-/*****/ 
+  /*****/ 
   if (this.mapasActivosService.mapaPalacioDormitorio === true){                // DORMITORIO
 
     if (idBoton.id === "button-left") {
@@ -454,7 +455,7 @@ botEntreColumnas(event: MouseEvent){
     }
     }
 
-/*****/                                                     // Estrellas ACTIVO
+  /*****/                                                     // Estrellas ACTIVO
   if (this.mapasActivosService.mapaEstrellas === true) {                                 
     if (idBoton.id === "button-left") {
       this.backtoMenu()
@@ -465,7 +466,11 @@ botEntreColumnas(event: MouseEvent){
   
 }
 
-
+fixBug(){         /* esta funcion previene el bug visual de ventana izq al apsar de estos elementos a alguno de la columna izq directamente */
+  this.mapasActivosService.mapaPalacioCocina1 = false
+  this.mapasActivosService.mapaPalacioCocina2 = false
+  this.mapasActivosService.mapaPalacioDormitorio = false
+}
 
 
 

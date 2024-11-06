@@ -4,19 +4,19 @@
   <!-- LADO IZQUIERDO -->
 
   <div class="columna-izquierda">
-      <button class="boton-columna" (click)="clickInformes(); ocultarElemento('informes'); actualizarBotonesActivos()">
+      <button class="boton-columna" (click)="this.notificacionesService.noticiaSinVer = false; clickInformes(); ocultarElemento('informes'); actualizarBotonesActivos(); fixBug()">
         <h3>Informes</h3>
         <div class="antorcha-izq">
-          <app-gift-antorchas class="fuego" [ngClass]="{'oculto': elementosOcultos.includes('informes')}"></app-gift-antorchas>
+          <app-gift-antorchas class="fuego" [ngClass]="{'oculto': !this.notificacionesService.noticiaSinVer && elementosOcultos.includes('informes')}"></app-gift-antorchas>
         </div>
       </button>
-      <button class="boton-columna" (click)="clickMisiones(); ocultarElemento('misiones'); actualizarBotonesActivos()">
+      <button class="boton-columna" (click)="clickMisiones(); ocultarElemento('misiones'); actualizarBotonesActivos(); fixBug()">
         <h3>Misiones</h3>
         <div class="antorcha-izq">
           <app-gift-antorchas class="fuego" [ngClass]="{'oculto': elementosOcultos.includes('misiones')}"></app-gift-antorchas>
         </div>
       </button>
-      <button class="boton-columna" (click)="clickHistoria(); ocultarElemento('historia'); actualizarBotonesActivos()">
+      <button class="boton-columna" (click)="clickHistoria(); ocultarElemento('historia'); actualizarBotonesActivos(); fixBug()">
         <h3>Historia</h3>
         <div class="antorcha-izq">
           <app-gift-antorchas class="fuego" [ngClass]="{'oculto': elementosOcultos.includes('historia')}"></app-gift-antorchas>

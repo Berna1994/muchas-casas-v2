@@ -9,7 +9,6 @@ export class MapasActivosService {
   _mapaPalacioCocina1 = false
   _mapaPalacioCocina2 = false
   _mapaPalacioDormitorio = false
-
   _mapaEstrellas = false
 
   get mapaPalacio(): boolean {

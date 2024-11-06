@@ -87,7 +87,7 @@ export class PalacioComponent {
     `,
     `Una laguna escondida en un valle al que se llega a traves de un sendero entre las montañas, famosa por estar llena de deliciosas almejas y ser un excelente terreno de caza. Se dice que en el lago vive la misteriosa mujer-ciervo Kizbiz-Aral, pero muchos afirman que no existe o que se fue hace mucho tiempo.
     `,
-    `Uno de los bosques tenebrosos donde recide Shàmman-Fotthor, alli desaparece el rio de Anrizudar donde la tierra se vuelve lodosa, oscura y llena de malditas moscas chupasangre. Se cree que mas alla de este bosque espantoso se acava el mundo, donde el agua se traga la tierra hasta que algun dia no quede nada.
+    `Uno de los bosques tenebrosos donde recide Shàmman-Fotthor, alli desaparece el rio de Anrizudar donde la tierra se vuelve lodosa, oscura y llena de malditas moscas chupasangre. Se cree que mas alla de este bosque espantoso se acava el mundo, donde el agua se traga la tierra hasta que algun día no quede nada.
     En tu mision encomendada por el viejo Erar Saram encontraste a la tribu exiliada del pantano y los convenciste de que te ayudaran a encontrar las flores brillantes.
     `,
   ];

@@ -24,7 +24,7 @@
 .pagination button {
   width: 100%;
   padding: 10px;
-  background-color: rgb(205, 179, 162);
+  background-color: rgb(82, 68, 32);
   border: 2px solid black; 
   border-style: outset;
   box-sizing: border-box;
@@ -46,10 +46,9 @@
   flex-grow: 1;
 }
 
+
 .padding-texto {
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
+
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -71,8 +70,11 @@
 .ul-opciones-respuestas-dialogos {
   justify-content: center; /* Centra los botones verticalmente */
   padding: 0; /* Elimina el padding del ul */
+  padding-bottom: 30px;
   margin: 0; /* Elimina el margen del ul */
   margin-top: 20px;
+  display: flex; 
+  flex-direction: column;
 }
 
 .div-opciones-respuestas-dialogos{
@@ -83,7 +85,7 @@
 }
 
 .div-opciones-respuestas-dialogos button {
-  background-color: #e7c6b75e;
+  background-color: rgba(230, 226, 217, 0.76);
   padding: 3px; /* Espacio interno en el botón */
   margin: 1px 0; /* Espacio entre los botones */
   text-align: center;
@@ -94,4 +96,72 @@
 .div-columna-derecha{
   flex-direction: row;
   overflow-y: auto;
+  margin-left: 20px;
+  padding-right: 20px;
 }
+
+
+.ul-barra-superior {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en nuevas filas */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+}
+
+.ul-barra-superior button {
+  width: 100%; /* Ocupa el ancho completo del <li> */
+  height: 100%;
+  padding: 5px;
+  background-color: rgba(63, 10, 10, 0.76);
+  background-image: url('/images/bone-texture.png');
+  border-style: groove;
+  box-sizing: border-box;
+  display: inline-flex;
+  white-space: nowrap;
+  justify-content: center;
+}
+
+.ul-barra-superior button.active {
+  background-color: rgba(239, 169, 169, 0.451)
+}
+
+.ul-barra-superior li {
+  flex: 1 1 20%; /* Cada <li> ocupa al menos el 20% del ancho, ajustable según necesidades */
+  box-sizing: border-box;
+  padding: 0px; /* Espaciado entre botones */
+}
+
+
+
+.ul-barra-de-proyectos button.active{
+  font-weight: bold;
+  background-color: #c7956c;
+  height: 100%;
+}
+
+.titulo-proyectos {
+  font-weight: normal;
+  display: inline; /* Asegura que el subrayado solo esté debajo del texto */
+  border-bottom: 3px groove #120d0dc5; /* Tipo, grosor y color del subrayado */
+  padding-bottom: 2px; /* Espacio entre el texto y el subrayado */
+}
+
+.texto-proyectos{
+  padding: 25px;
+  padding-top: 10px;
+}
+
+.ul-barra-superior .botones-titulos-secundarios.active {
+  background-color: rgba(177, 35, 35, 0.76)!important;
+}
+
+.botones-titulos-secundarios.active {
+  background-color: rgba(177, 35, 35, 0.76)!important;
+}
+
+.botones-titulos-secundarios {
+  background-color: rgba(63, 10, 10, 0.76)!important;
+}
+

@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MisionesService } from '../../../../../public/services/misiones.service';
 import { ContadorService } from '../../../../../public/services/contador-dias.service';
 import { FormsModule } from '@angular/forms';
+import { CapitalizePipe } from '../../../../../public/pipes/capitalize.pipe';
+
 
 @Component({
   selector: 'app-misiones',
   templateUrl: './misiones.component.html',
   styleUrls: ['./misiones.component.css'],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CapitalizePipe],
   standalone: true
 })
 
@@ -21,14 +23,13 @@ export class MisionesComponent {
   inputDescripcion: string = ""
   verificadorLugarSeleccionado = false
   lugarDeViaje = 0
-  tiempoDeViaje: string[] = ['0', '8-10', '4-5', '5-7', '2', 'algunos']; 
-  
+  tiempoDeViaje: string[] = ['0', '8-10', '4-5', '5-7', '2', 'se desconoce cuantos']; 
 
   inputShowUp() {
     this.inputVisible = true;
   }
 
-  constructor(public misionesService: MisionesService, public contadorService: ContadorService) {}/*  2 constructores, para los 2 servicos*/
+  constructor(public misionesService: MisionesService, public contadorService: ContadorService, private capitalizePipe: CapitalizePipe) {}
 
 
   get totalPages(): number {
@@ -54,10 +55,12 @@ export class MisionesComponent {
 
 
   agregarTextoTitulo() {
-    this.misionesService.agregarTitulo(this.inputTitulo.trim());  // Inserta el número en el array del servicio
-    console.log ("texto titulo:_" + this.inputTitulo.trim())
+    // Aplica el CapitalizePipe antes de agregar el título al servicio
+    const capitalizedTitulo = this['capitalizePipe'].transform(this.inputTitulo.trim());
+    this.misionesService.agregarTitulo(capitalizedTitulo);  // Inserta el título capitalizado en el array del servicio
+    console.log("Texto título: _" + capitalizedTitulo);
     this.inputTitulo = '';  // Limpia el input después de agregarlo al array
-  }
+}
 
   agregarDescripcion() {
     this.misionesService.agregarDescripcion(this.inputDescripcion.trim());  // Inserta el número en el array del servicio
@@ -99,7 +102,10 @@ export class MisionesComponent {
     this.inputVisible = false;
   }
 
-  
+  limpiarRegistros(){
+    this.inputTitulo = '';
+    this.inputDescripcion = '';
+  }
 
   
 }

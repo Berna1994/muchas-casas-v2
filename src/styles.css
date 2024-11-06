@@ -24,6 +24,9 @@ body {
 * button:hover {
   cursor: pointer;
 }
+* li button {
+  background-image: url('/images/bone-texture.png');
+}
   
 /* Ensure that your application content is above the background */
 app-root {
@@ -37,10 +40,13 @@ app-informes{ /*  no se si esto devo escribirlo aca o en otro css */
 }
 app-historia{ /*  no se si esto devo escribirlo aca o en otro css */
   width: 100%;
+  height: 100%; 
 }
 app-misiones{ /*  no se si esto devo escribirlo aca o en otro css */
   width: 100%;
+  height: 100%; 
 }
 app-mundo{ /*  no se si esto devo escribirlo aca o en otro css */
   width: 100%;
+  height: 100%; 
 }

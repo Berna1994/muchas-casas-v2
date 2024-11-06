@@ -1,5 +1,6 @@
 .paginador-container {
   width: 100%; /* O el ancho deseado del contenedor */
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -20,7 +21,7 @@
   width: 100%; /* Hace que el botón ocupe todo el ancho del <li> */
   height: 100%;
   padding: 10px;
-  background-color: rgb(205, 179, 162);
+  background-color: rgb(82, 68, 32);
   border: 2px solid black; 
   border-style: outset;
   box-sizing: border-box;
@@ -35,6 +36,7 @@
 
 .boton-mas-misiones {
   background-color: brown;
+  color: #ffffffc7; /* color del texto */
   top: 0%;
   right: 0%;
   min-width: fit-content;
@@ -45,6 +47,7 @@
   display: flex; 
   flex-direction: row; 
   width: 100%;
+  min-height: 65px;
 }
 
 
@@ -55,7 +58,8 @@
 
 .crear-misiones {
   position: absolute;
-  background-color: rgb(111, 80, 59);
+  background-color: rgb(109 100 167);
+  background-image: url("/images/bone-texture.png");
   border: 2px solid black; 
   border-style: outset;
   top: 55%;
@@ -69,13 +73,13 @@
   gap: 5px;
 }
 
-.crear-misiones input, .crear-misiones button {
+.crear-misiones input, textarea, .crear-misiones button {
   background-color: #e7d8cb;
   font-size: large;
 }
 
 .botones-viaje .color {
-  background-color: rgb(199, 81, 81);
+  background-color: rgba(170, 164, 154, 0.537);
 }
 
 .botones-viaje{
@@ -97,6 +101,25 @@
   background-color: grey;
   width: 5%;
   padding: 5px;
-
   opacity: 1;
+}
+
+.ventana-detalles-mision{
+  padding: 30px;
+  padding-top: 10px;
+  overflow-y: auto;
+}
+
+.contenedor-seleccion-destinos{
+  flex-direction: column; 
+  background-color: #e7d8cb;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.banner-selector-destinos{
+  text-align: center;  
+  padding-bottom: 5px;
+  padding-top: 5px;
 }

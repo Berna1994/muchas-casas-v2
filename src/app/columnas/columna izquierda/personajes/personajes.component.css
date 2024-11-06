@@ -35,7 +35,7 @@
 .pagination button {
   width: 100%; /* Hace que el botón ocupe todo el ancho del <li> */
   height: 100%;
-  background-color: rgb(205, 179, 162);
+  background-color: rgb(82, 68, 32);
   border: 2px solid black; 
   border-style: outset;
   box-sizing: border-box;
@@ -44,6 +44,7 @@
 .pagination button.active {
   background-color: #c7956c;
   cursor: default;
+  font-weight: bold;
 }
 
 

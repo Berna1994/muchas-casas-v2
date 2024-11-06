@@ -48,13 +48,6 @@ export class AppComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
   console(){
     console.log("noticiasDisponibles-interatuable: " )
   }
@@ -182,7 +175,7 @@ export class AppComponent implements OnInit {
           "Tienes un recuerdo olvidado de tus padres cuando eras muy joven.  Sientes el calor de la hogera y el aroma de una comida cuyo sabor no recuerdas, pero al momento de provarla el recuerdo salta a la mañana siguiente y pronto se desvanece.",
           "Te encuentras solo y perdido en el bosque, tratando de buscar a tus amigos de la infancia antes de que la lluvia haga desbordar el rio que cruzaste con ellos. No los encuentras pero si a un gran conejo blanco, cuando tratas de acercarte cada ves que lo miras estas mas lejos de la criatura.",
           "Cierras los ojos pero al rato te pica la barbilla, cuando te rascas te salen polillas. Te arden los ojos y solo ves piojos, luego te dan cosquillas en las rodillas, y si te pones de lado sientes olor a pescado.",
-          "Recuerdas estar sentado junto a un artesano esculpiendo rocas juntos. El hombre te es familiar pero no recuerdas el por que. Sientes que hiso algo malo pero es una persona honesta. Al dia siguiente te enteraste de que cayo por un acantilado pero no recuerdas si murio o no.",
+          "Recuerdas estar sentado junto a un artesano esculpiendo rocas juntos. El hombre te es familiar pero no recuerdas el por que. Sientes que hiso algo malo pero es una persona honesta. Al día siguiente te enteraste de que cayo por un acantilado pero no recuerdas si murio o no.",
           "Sientes olor a queso. Estas en un banquete y todos los invitados son bisins. Te sirven leche y quesos. Hay queso asado en pinchos, queso derretido en cuencos, quesos muy blandos y quesos crocantes.",
       ],
       Sueños_B: [
@@ -360,8 +353,8 @@ export class AppComponent implements OnInit {
   constructor (private contadorService: ContadorService, public notificacionesService: NotificacionesService) {}
 
   incrementarContador(): void {
-    this.contadorService.incrementar(); // cambia el valor del dia actual +1
-    this.notificacionesService.actualizarNotificaciones(); // se actualizan las notificaciones al pasar de dia
+    this.contadorService.incrementar(); // cambia el valor del día actual +1
+    this.notificacionesService.actualizarNotificaciones(); // se actualizan las notificaciones al pasar de día
   }
 
   ngOnInit(): void { //se actualizan las notificaciones al iniciar el programa
@@ -370,7 +363,6 @@ export class AppComponent implements OnInit {
     this.notificacionesService.generarArraysDeHistoriales() // Generar los arrays dinámicos de historiales
 
     // Esto asegura que el servicio notificaciones sea utilizado
-    console.log("Servicio NotificacionesService inyectado y ejecutando ngOnInit");
     this.notificacionesService.fakengOninit()
 
   }

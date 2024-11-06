@@ -17,31 +17,42 @@
 
     <button (click)="inputShowUp()" class="boton-mas-misiones">Crear misión</button> <!-- Botón para añadir una nueva misión -->
     <div *ngIf="inputVisible" class="crear-misiones">
-
-      <button style="pointer-events: none; text-align: center; margin-bottom: -5px;">Destino de la mision</button>
-      <div class="botones-viaje">
+      <div class="contenedor-seleccion-destinos">
+        <div class="banner-selector-destinos">
+        Destino de la mision
+        </div>
+        <div class="botones-viaje">
           <button (click)="elegirlugarDeViaje(0); onButtonClick($event)">Muchas Casas</button>
           <button (click)="elegirlugarDeViaje(1); onButtonClick($event)">Tierras del Queso</button>
           <button (click)="elegirlugarDeViaje(2); onButtonClick($event)">Volal Tolis</button>
           <button (click)="elegirlugarDeViaje(3); onButtonClick($event)">Laguna de las Almejas</button>
           <button (click)="elegirlugarDeViaje(4); onButtonClick($event)">Bosque Pantanoso</button>
           <button (click)="elegirlugarDeViaje(5); onButtonClick($event)">Otro lugar</button>
+        </div>
       </div>
 
-      <input class="input-misiones" [(ngModel)]="inputTitulo" placeholder="Nombre de la mision" />
+      <input class="input-misiones" 
+      [(ngModel)]="inputTitulo" 
+      [ngModel]="inputTitulo | capitalize" 
+      placeholder="Nombre de la mision" />
 
-      <input class="input-misiones" [(ngModel)]="inputDescripcion" placeholder="Descripcion de la mision" />
-
+      <textarea class="input-misiones" 
+      style="min-height: 100px; resize: none;" 
+      [(ngModel)]="inputDescripcion" 
+      [ngModel]="inputDescripcion | capitalize" 
+      placeholder="Descripcion de la mision">
+      </textarea>
+            
       <div class="div-decretar-cancelar" style="white-space: nowrap;">
         <button (click)="crearMision()" [disabled]="!inputDescripcion.trim() || !inputTitulo.trim() || verificadorLugarSeleccionado === false">Decretar</button>
-        <button (click)="inputVisible = false">cancelar</button>
+        <button (click)="inputVisible = false; limpiarRegistros()">Cancelar</button>
       </div>
       
     </div>
   </div>
       
   <!-- Mostrar la misión actual -->
-  <div style="padding: 10px;">
+  <div class="ventana-detalles-mision">
     <h2>{{ tituloMision[currentPage] }}</h2>
     <p>[Tiempo estimado de arrivo {{tiempo[currentPage]}} dias, tiempo transcurrido {{misionesService.contadorMisiones[currentPage]}} dias]</p>
     <p>{{ mision[currentPage] }}</p>

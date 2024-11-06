@@ -4,9 +4,16 @@
 
   <div class="col" class="banner">
     <h1>Edad de Piedra</h1>
-    <Button *ngIf="!columnasComponent?.isDivVisible"  class="boton-turnos" (click)="booleanDivTurnos()" [disabled]="verDivTurnos || verDivTurnos2">
+    <Button 
+    *ngIf="!columnasComponent?.isDivVisible"  
+    class="boton-turnos" 
+    (click)="booleanDivTurnos(); 
+    this.notificacionesService.funcionChekearNotificacionesVistas();
+    this.notificacionesService.funcionActualizarDialogoIrADormir()" 
+    [disabled]="verDivTurnos || verDivTurnos2"
+    >
       <!-- *ngIf="!columnasComponent?.isDivVisible" ES LA FORMA DE USAR LA VARIABLE DEL COMP HIJO PARA MOSTRAR O NO EL BOTON-->
-      <p style="position: absolute; right: 15%; top: 30%; font-weight: bolder;">Siguiente dia</p>
+      <p style="position: absolute; right: 15%; top: 30%; font-weight: bolder;">Siguiente día</p>
     </Button>
   </div>
 
@@ -23,9 +30,10 @@
 </div>
 
 <div class="div-turnos" *ngIf="verDivTurnos">
-  <p>Te preparas para descansar luego de un largo dia</p>
+  
+  <p>{{this.notificacionesService.dialogoIrADormir}}</p>
 
-  <button class="boton-dormir" (click)="booleanDivTurnos(); booleanDivTurnos2(); dialogosPasarTurno();" (click)="incrementarContador();" >Dormir</button> 
+  <button class="boton-dormir" [disabled]="!this.notificacionesService.todasNoticiasVistas" (click)="booleanDivTurnos(); booleanDivTurnos2(); dialogosPasarTurno(); incrementarContador();">Dormir</button> 
 
   <button class="boton-cancelar" (click)="booleanDivTurnos()">Cancelar</button>
 </div>

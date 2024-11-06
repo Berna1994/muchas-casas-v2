@@ -8,8 +8,9 @@ export class MisionesService {
   public _contadorMisiones: number[] = [0];
   private _tituloMision: string[] = [`Expedición a las tierras del queso:`,];
   private _diasDeViaje: string[] = ['8-10',];
-  private _mision: string[] = [
-    `
+  private _mision: string[] = [       /*  array misiones */
+   
+    `  
     Ërtong Alaklamcubor fue enviada junto a los mercaderes que traen bisin para llegar a las tierras de la gente que produce queso y comerciar unos objetos de valor a cambio de productos exóticos e información. Además de los mercaderes, viaja con una escolta escoltada por algunos enanos asignados por Etägók.
     Objetos de valor: 
     
@@ -17,7 +18,8 @@ export class MisionesService {
     - 1 Bisin-Egen (regalo de la vaca): es una estatuilla de cuarzo de la mejor calidad, tiene forma de bisin, este parece estar transportando en su boca un ramo de flores.
     - 3 herramientas de cobre.
     - 3 estatuillas sencillas de granito.
-    - varias cosas genéricas más.`,];
+    - varias cosas genéricas más.`,
+  ];
 
 //--------------------------------------------
   
