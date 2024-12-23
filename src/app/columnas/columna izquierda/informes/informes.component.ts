@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class InformesComponent{
   currentPage: number = 1;
-  totalPages: number = 3;
+  totalPages: number = 2;
   respuestaSeleccionadaTrueFalse = false
   indiceProyectos: number = 0
   
