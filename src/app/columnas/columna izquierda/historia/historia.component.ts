@@ -40,8 +40,6 @@ export class HistoriaComponent {
 
       *Kuthdêng Odroz se llama así debido a que sobrevivió a un terrible accidente de joven cuando cazaba un venado blanco. Irónicamente murió en otro accidente muy similar tratando de cazar a la misma criatura. Su hijo lo vengó dando caza al mítico venado y guarda la piel de la criatura albina como reliquia familiar.*
       `},
-    { titulo: "Título 3", 
-      texto: "Este es el texto asociado al Título 3." }
   ];
 
   criaturas = [
