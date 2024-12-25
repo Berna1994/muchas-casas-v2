@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/muchas-casas2/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
