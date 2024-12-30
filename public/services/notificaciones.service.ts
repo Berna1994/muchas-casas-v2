@@ -1,36 +1,151 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { ContadorService } from './contador-dias.service';
-
+import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
+import { ConfiguracionDatos } from '../../src/app/firebase-component/carga-de-datos';
+import { AuthService } from "./auth.service";
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificacionesService {
-  
   notificacionesVisibles: any[] = [];
   respuestasVisibles: string[] = [];
-  noticiasDisponibles: any[] = []; // es una copia de notificacionesVisibles que se usa para no alterar el array original // se deve Inicializar vacío y se actualiza en el app.component.ts cuando se pasa de turno
+  noticiasDisponibles: any[] = []; // es una copia de notificacionesVisibles que se usa para no alterar el array original
   arrayHistorialesDeCadaNoticia: any[] = [];
-  N: number = 1 /* no poner 0 */
-  ID = ""
-  colorActivoPrimario: string = "aun no definido"
-  colorActivoSecundario: string = "aun no definido"
-  conversacion: string = "aun no definido"
+  N: number = 1; // No poner 0
+  ID = '';
+  colorActivoPrimario: string = 'aun no definido';
+  colorActivoSecundario: string = 'aun no definido';
+  conversacion: string = 'aun no definido';
   currentPageNoticia: number = 0; // Para seleccionar noticias con los botones
- 
-  dialogoActivo: string = "aun no definido"
+  dialogoActivo: string = 'aun no definido';
   textoLargoSeleccionado = 'aun no definido';
-  finDialogosValueN: number = 0
-  finDialogosBoolean: boolean = false   /* esto se usa para despaarecer los dialogos de respuestas si no hay mas dialogos disponibles, ya que de lo contrario se estanca en el ultimo dialogo que hubo */
-  interrumpirDialogo: boolean = false   /* esto se usa para despaarecer los dialogos de respuestas si se llega a uno -EMPTY- */
-  noticiaSinVer: boolean = true
-  noticiasSinResponder: boolean = false
+  finDialogosValueN: number = 0;
+  finDialogosBoolean: boolean = false; // Esto se usa para desaparecer los diálogos de respuestas si no hay más disponibles
+  interrumpirDialogo: boolean = false; // Esto se usa para desaparecer los diálogos de respuestas si se llega a uno -EMPTY-
+  noticiaSinVer: boolean = true;
+  noticiasSinResponder: boolean = false;
 
-  arrayColoresPSinVer: any [] = []
-  CopiaElementosOcultos: any [] = []
-  arrayDialogosSinTerminar: any [] = []
-  todasNoticiasVistas: boolean = true
+  arrayColoresPSinVer: any[] = [];
+  CopiaElementosOcultos: any[] = [];
+  arrayDialogosSinTerminar: any[] = [];
 
-  dialogoIrADormir: string = "Te preparas para descansar luego de un largo día"
+  dialogoIrADormir: string = 'Te preparas para descansar luego de un largo día';
+
+  /* Cosas firestore */
+  private userId: string | null = null;
+  public variableActualizarDialogosSiONo = false;
+
+  constructor(
+    private contadorService: ContadorService,
+    private configuracionDatos: ConfiguracionDatos,
+    private firestore: Firestore,
+    private injector: Injector, // Inyección diferida para evitar dependencia circular
+    authService: AuthService
+  ) {
+    authService.userId$.subscribe((userId) => {
+      this.userId = userId;
+    });
+  }
+
+  private obtenerConfiguracionDatos(): ConfiguracionDatos {
+    return this.injector.get(ConfiguracionDatos);
+  }
+
+
+  getValor(): boolean {
+    const configuracionDatos = this.obtenerConfiguracionDatos();
+    return configuracionDatos.todasNoticiasVistas; 
+  }
+  
+  setValor(valorBooleano: boolean): void {
+    const configuracionDatos = this.obtenerConfiguracionDatos();
+    configuracionDatos.todasNoticiasVistas = valorBooleano;
+  }
+
+  
+  actualizarNoticiasVistas(valor: boolean): void {
+    const configuracionDatos = this.obtenerConfiguracionDatos();
+    configuracionDatos.todasNoticiasVistas = valor;
+  }
+  
+
+
+  guardarTodasNoticiasVistas(): void {
+    if (!this.userId) {
+      console.log("El usuario no está autenticado.");
+      return;
+    }
+
+    const userDoc = doc(this.firestore, "usuarios", this.userId);
+    const data = { todasNoticiasVistas: this.configuracionDatos.todasNoticiasVistas };
+
+    setDoc(userDoc, data, { merge: true })
+      .then(() => console.log("todasNoticiasVistas guardado exitosamente."))
+      .catch((error) => console.error("Error al guardar todasNoticiasVistas:", error));
+  }
+
+  guardarNotificacionesVisibles(): void {
+    if (!this.userId) {
+      console.log("El usuario no está autenticado.");
+      return;
+    }
+
+    const userDoc = doc(this.firestore, "usuarios", this.userId);
+    const data = { notificacionesVisibles: this.notificacionesVisibles };
+
+    setDoc(userDoc, data, { merge: true })
+      .then(() => console.log("Notificaciones visibles guardadas exitosamente."))
+      .catch((error) => console.error("Error al guardar notificaciones visibles:", error));
+  }
+
+  recuperarTodasNoticiasVistas(): void {
+    if (!this.userId) {
+      console.log('El usuario no está autenticado.');
+      return;
+    }
+  
+    const userDoc = doc(this.firestore, 'usuarios', this.userId);
+  
+    getDoc(userDoc)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const configuracionDatos = this.obtenerConfiguracionDatos();
+          configuracionDatos.todasNoticiasVistas = data?.['todasNoticiasVistas'] ?? 0; // Valor por defecto es 0.
+          console.log('todasNoticiasVistas recuperado:', configuracionDatos.todasNoticiasVistas);
+        } else {
+          console.log('No se encontraron datos para el usuario.');
+        }
+      })
+      .catch((error) =>
+        console.error('Error al recuperar el todasNoticiasVistas:', error)
+      );
+  }
+
+  recuperarNotificacionesVisibles(): void {
+    if (!this.userId) {
+      console.log("El usuario no está autenticado.");
+      return;
+    }
+  
+    const userDoc = doc(this.firestore, "usuarios", this.userId);
+  
+    getDoc(userDoc)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          this.notificacionesVisibles = data?.['notificacionesVisibles'] ?? [];
+          console.log("Notificaciones visibles recuperadas:", this.notificacionesVisibles);
+        } else {
+          console.log("No se encontraron datos para las notificaciones visibles.");
+        }
+      })
+      .catch((error) =>
+        console.error("Error al recuperar las notificaciones visibles:", error)
+      );
+  }
+  
+
 
 
   /*  LOS "COLORES" EN LOS ARRAYS SON LA FORMA EN QUE LLAMO A LOS CODIGOS UNICOS DE IDENTIFICACION */
@@ -348,13 +463,11 @@ export class NotificacionesService {
       ]
     }
   ]
-
-  constructor(private contadorService: ContadorService) {}
   
 
   actualizarArrayColoresPSinVer(indicePagina: number){
-    console.log("se llamo actualizarArrayColoresPSinVer: ")
-    console.dir(this.arrayColoresPSinVer)
+    // console.log("se llamo actualizarArrayColoresPSinVer: ")
+    // console.dir(this.arrayColoresPSinVer)
     
     const colorPrimarioSeleccionado = this.notificacionesVisibles[indicePagina].colorPrimario;
     const indexColor = this.arrayColoresPSinVer.indexOf(colorPrimarioSeleccionado);
@@ -366,41 +479,57 @@ export class NotificacionesService {
   }
 
   funcionChekearNotificacionesVistas() {
-    console.log("se llamo a funcionChekearNotificacionesVistas")
-    
-    
-    /* primero chekamos que la antorcha informes este apagada */
+    console.log("se llamo a funcion Chekear Notificaciones Vistas")
+    const configuracionDatos = this.obtenerConfiguracionDatos();
+    console.log("databaseNoticiasVistasExiste = " + configuracionDatos.databaseNoticiasVistasExiste)
+    console.log("baseDatosConsultada = " + configuracionDatos.baseDatosConsultada)
 
-    if (this.noticiaSinVer || !this.CopiaElementosOcultos.includes('informes')){
-      this.todasNoticiasVistas = false
-      console.log("antorcha informes esta encendida, todasNoticiasVistas: " + this.todasNoticiasVistas)
+    if (configuracionDatos.baseDatosConsultada === true && configuracionDatos.databaseNoticiasVistasExiste === true){
+      console.log ("se omitio la funcion funcionChekearNotificacionesVistas al verificarse que las variables que modifica ya existen en la base de datos")
+      return
+    } 
+    if (this.variableActualizarDialogosSiONo === true){
+      this.variableActualizarDialogosSiONo = false
       return
     }
-    /* luego chekeamos que se haya abierto la ventana de cada noticia disponible */
-    if (this.arrayColoresPSinVer.length > 0){
-      this.todasNoticiasVistas = false
-      console.log("hay noticias sin ver, todasNoticiasVistas: " + this.todasNoticiasVistas)
-      return
-    }
-    /* luego chekeamos que todas las interacciones ayan llegado a su fin si no hay opciones de dialogo visibles */
-   
-   if (this.noticiasDisponibles.some(noticia => !noticia.interaccionTerminada)) { // Usamos `some` para verificar si hay interacciones sin terminar
-    this.todasNoticiasVistas = false;
-    console.log("hay noticias sin interactuar, todasNoticiasVistas: " + this.todasNoticiasVistas);
-    return;
-  }
+    
+    else {
+      /* primero chekamos que la antorcha informes este apagada */
+      
+      if (this.noticiaSinVer || !this.CopiaElementosOcultos.includes('informes')){
+        configuracionDatos.todasNoticiasVistas = false
+        // console.log("antorcha informes esta encendida, todasNoticiasVistas: " + configuracionDatos.todasNoticiasVistas)
+        return
+      }
+      /* luego chekeamos que se haya abierto la ventana de cada noticia disponible */
+      if (this.arrayColoresPSinVer.length > 0){
+        configuracionDatos.todasNoticiasVistas = false
+        // console.log("hay noticias sin ver, todasNoticiasVistas: " + configuracionDatos.todasNoticiasVistas)
+        return
+      }
+      /* luego chekeamos que todas las interacciones ayan llegado a su fin si no hay opciones de dialogo visibles */
 
-    this.todasNoticiasVistas = true
-    console.log("no se encontraron notificaciones sin ver o interactuar, todasNoticiasVistas: " + this.todasNoticiasVistas)
-  
+      if (this.noticiasDisponibles.some(noticia => !noticia.interaccionTerminada)) { // Usamos `some` para verificar si hay interacciones sin terminar
+      configuracionDatos.todasNoticiasVistas = false;
+      // console.log("hay noticias sin interactuar, todasNoticiasVistas: " + configuracionDatos.todasNoticiasVistas);
+      return;
+      }
+
+      configuracionDatos.todasNoticiasVistas = true
+      // console.log("no se encontraron notificaciones sin ver o interactuar, todasNoticiasVistas: " + configuracionDatos.todasNoticiasVistas)
+    }
   }
 
   funcionActualizarDialogoIrADormir(){
-    console.log("se llamo a funcionActualizarDialogoIrADormir, ademas todasNoticiasVistas: " + this.todasNoticiasVistas)
-    if(this.todasNoticiasVistas === true) {
-      this.dialogoIrADormir = "Te preparas para descansar luego de un largo día"
-    } else {
-      this.dialogoIrADormir = "Aún tienes noticias pendientes"
+    // console.log("se llamo a funcionActualizarDialogoIrADormir, ademas todasNoticiasVistas: " + configuracionDatos.todasNoticiasVistas)
+    const configuracionDatos = this.obtenerConfiguracionDatos();{
+    console.log ("se llamo a funcionActualizarDialogoIrADormir, todasNoticiasVistas:  " + configuracionDatos.todasNoticiasVistas)
+
+      if(configuracionDatos.todasNoticiasVistas === true) {
+        this.dialogoIrADormir = "Te preparas para descansar luego de un largo día"
+      } else {
+        this.dialogoIrADormir = "Aún tienes noticias pendientes"
+      }
     }
   }
 
@@ -417,8 +546,8 @@ export class NotificacionesService {
       }
     );
 
-    console.log ("se llamo a actualizar notificaciones: ")
-    console.dir(this.notificacionesVisibles)
+    // console.log ("se llamo a actualizar notificaciones: ")
+    // console.dir(this.notificacionesVisibles)
     this.actualizarFinDialogos()
   }
 
@@ -433,8 +562,8 @@ export class NotificacionesService {
     }
     
     this.noticiasDisponibles = this.obtenerNotificacionesVisibles();
-    console.log("Array de noticias disponibles:");
-    console.dir(this.noticiasDisponibles);
+    // console.log("Array de noticias disponibles:");
+    // console.dir(this.noticiasDisponibles);
     
     this.actualizarArrayColoresPSinVer(0) /* esto es para chekear notificaciones sin interactuar */
   }
@@ -446,7 +575,7 @@ export class NotificacionesService {
   
   actualizarColorPrimario(index: number): void {
     this.colorActivoPrimario = this.notificacionesVisibles[index].colorPrimario;
-    console.log("se llamo a actualizarColorPrimario/ colorActivoPrimario: " + this.colorActivoPrimario)
+    // console.log("se llamo a actualizarColorPrimario/ colorActivoPrimario: " + this.colorActivoPrimario)
   }
 
 
@@ -470,7 +599,7 @@ export class NotificacionesService {
 
   // Método para agregar objetos a un array dinámico generado
   agregarObjetoAlArray(arrayDinamico: any, conversacion: string, respuestas: string,): void {
-    console.log("se llamo agregarObjetoAlArray")
+    // console.log("se llamo agregarObjetoAlArray")
     arrayDinamico.items.push({
       conversacion: conversacion,
       respuestas: respuestas,
@@ -479,12 +608,12 @@ export class NotificacionesService {
     /* ese if asegura que el valor de N no siga creciendo cuando llego al LiteralPrimitive, y que se resetee el valor de N al clikear otra noticia */
     if (this.finDialogosBoolean === false){   
       arrayDinamico.nivelDialogo += 1 
-      console.log("se incremento el valor nivelDialogo (osea el N) del objeto seleccionado")
+      // console.log("se incremento el valor nivelDialogo (osea el N) del objeto seleccionado")
 
       arrayDinamico.colorSecundarioGuardado = this.colorActivoSecundario
-      console.log("se actualizo el valor de este array dinamico de color Secundario GUARDADO: " + arrayDinamico.colorSecundarioGuardado)
+      // ("se actualizo el valor de este array dinamico de color Secundario GUARDADO: " + arrayDinamico.colorSecundarioGuardado)
     } else {
-      console.log("no se incremento el niveldialogo(valor N) dle objeto seleccionado")
+      // console.log("no se incremento el niveldialogo(valor N) dle objeto seleccionado")
     }
     this.actualizarValorN()
 
@@ -495,7 +624,7 @@ export class NotificacionesService {
     const arraySeleccionado = this.arrayHistorialesDeCadaNoticia.find(obj => obj.colorPrimario === this.colorActivoPrimario);
     
     this.N = arraySeleccionado.nivelDialogo;
-    console.log("se llamo a actualizar N, valor N: " + this.N)
+    // console.log("se llamo a actualizar N, valor N: " + this.N)
 
     if(arraySeleccionado === undefined){
       console.log("arraySeleccionado no definido, se interrumpe actualizarValorN")
@@ -507,7 +636,7 @@ export class NotificacionesService {
  
     // Seleccionar el objeto que tiene un colorPrimario específico
     const objetoSeleccionado = this.arrayHistorialesDeCadaNoticia.find(obj => obj.colorPrimario === this.colorActivoPrimario);
-    console.log("determinar variables => objetoSeleccionado: " + objetoSeleccionado)
+    // console.log("determinar variables => objetoSeleccionado: " + objetoSeleccionado)
     // Agregar dos propiedades strings (conversacion y respuestas) al array "items" de ese objeto
     if (objetoSeleccionado) {
       this.agregarObjetoAlArray(objetoSeleccionado, this.dialogoActivo, this.textoLargoSeleccionado,);
@@ -524,7 +653,7 @@ export class NotificacionesService {
     // Método para actualizar dialogoActivo (el dialogo arriba del selector)
     if (this.finDialogosBoolean === true || this.noticiasDisponibles[this.currentPageNoticia].finDialogos === 0) {
       this.dialogoActivo = this.noticiasDisponibles[this.currentPageNoticia].texto;
-      console.log("se llamo al if 1, finDialogosBoolean (deve ser true)= " + this.finDialogosBoolean + ' fin dialogos(deve ser 0) = ' + this.noticiasDisponibles[this.currentPageNoticia].finDialogos)
+      // console.log("se llamo al if 1, finDialogosBoolean (deve ser true)= " + this.finDialogosBoolean + ' fin dialogos(deve ser 0) = ' + this.noticiasDisponibles[this.currentPageNoticia].finDialogos)
       return;      
     }
     // Selección del diálogo en función de `N`
@@ -532,12 +661,12 @@ export class NotificacionesService {
     
     switch (N) {
       case 1:
-        console.log("se llamo al if switch 1")
+        // console.log("se llamo al if switch 1")
         this.dialogoActivo = this.noticiasDisponibles[this.currentPageNoticia]?.texto || '';
         if (this.dialogoActivo === "-EMPTY-"){
           this.interrumpirDialogo = true
           this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
-          console.log("CASO 1 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
+          // console.log("CASO 1 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
           return
         }    
         break;
@@ -548,12 +677,12 @@ export class NotificacionesService {
   
       case 3:
         this.actualizarDialogoN3(this.dialogosN3);
-        console.log("se llamo al if switch 3")
+        // console.log("se llamo al if switch 3")
         break;
 
       case 4:
         this.actualizarDialogoN4(this.respuestasN3);
-        console.log("se llamo al if switch 4")
+        // console.log("se llamo al if switch 4")
         break;
 
       default:
@@ -575,14 +704,14 @@ export class NotificacionesService {
         elementA.arrayDialogosN2.forEach((elementB: any) => {
 
           if (this.colorActivoSecundario === elementB.colorSecundario) {
-            console.log("se igualaron los colores secundarios y se actualizo el dialogo activo")
+            // console.log("se igualaron los colores secundarios y se actualizo el dialogo activo")
             this.dialogoActivo = elementB.dialogo;
             dialogoEncontrado = true;  // Marcamos que se encontró un diálogo
 
             if (this.dialogoActivo === "-EMPTY-"){
               this.interrumpirDialogo = true
               this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
-              console.log("CASO 2 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
+              // console.log("CASO 2 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
               return
             }  
             return
@@ -610,13 +739,13 @@ export class NotificacionesService {
         elementA.arrayDialogosN3.forEach((elementB: any) => {
           
           if (this.colorActivoSecundario === elementB.colorSecundario) {
-            console.log("se igualaron los colores secundarios y se actualizo el dialogo activo")
+            // console.log("se igualaron los colores secundarios y se actualizo el dialogo activo")
             this.dialogoActivo = elementB.dialogo;
           }
           if (elementB.dialogo === "-EMPTY-"){
             this.interrumpirDialogo = true
             this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
-            console.log("CASO 3 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
+            // console.log("CASO 3 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
             return
           } 
         });
@@ -635,12 +764,12 @@ export class NotificacionesService {
           if (elementB.dialogo === "-EMPTY-"){
             this.interrumpirDialogo = true
             this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
-            console.log("CASO 4 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
+            // console.log("CASO 4 / interrumpirDialogo pasa a ser true, se resetea a false al clikear la proxima noticia")
             return
           }    
 
           if (this.colorActivoSecundario === elementB.colorSecundario) {
-            console.log("se igualaron los colores secundarios y se actualizo el dialogo activo")
+            // console.log("se igualaron los colores secundarios y se actualizo el dialogo activo")
             this.dialogoActivo = elementB.respuesta;
           }          
         });
@@ -654,7 +783,7 @@ export class NotificacionesService {
 
     const arrayDinamicoSeleccionado = this.arrayHistorialesDeCadaNoticia.find(obj => obj.colorPrimario === this.colorActivoPrimario);
     this.colorActivoSecundario = arrayDinamicoSeleccionado.colorSecundarioGuardado
-    console.log("color secundario activo actualizado => " + this.colorActivoSecundario)
+    // console.log("color secundario activo actualizado => " + this.colorActivoSecundario)
     
   }
 
@@ -685,18 +814,18 @@ export class NotificacionesService {
   }
 
   actualizarFinDialogos(){
-    console.log("se llamo actualizaar dialogos")
+    // console.log("se llamo actualizaar dialogos")
     this.finDialogosValueN = this.notificacionesVisibles[this.currentPageNoticia].finDialogos
     if (this.N > this.finDialogosValueN){
       this.finDialogosBoolean = true
       this.notificacionesVisibles[this.currentPageNoticia].interaccionTerminada = true
-      console.log("noticiasDisponibles: ")
-      console.dir(this.noticiasDisponibles)
+      // console.log("noticiasDisponibles: ")
+      // console.dir(this.noticiasDisponibles)
     }
     else {
       this.finDialogosBoolean = false
     }
-    console.log(" se llamo a actualizar finDialogosBoolean => " + this.finDialogosBoolean)
+    // console.log(" se llamo a actualizar finDialogosBoolean => " + this.finDialogosBoolean)
 
   }
       

@@ -65,7 +65,7 @@ export class InformesComponent{
 
 switchRespuestaSeleccionada(event: string): void {
   this.notificacionesService.obtenerSeleccionRespuestas()
-  console.log("se llamo a switchRespuesstSeleccionada, respuestas disponibles: | " + this.notificacionesService.respuestasVisibles + " |")
+/*   console.log("se llamo a switchRespuesstSeleccionada, respuestas disponibles: | " + this.notificacionesService.respuestasVisibles + " |") */
   this.respuestaSeleccionadaTrueFalse = true
 
   const selectedTextoCorto = event;
@@ -101,8 +101,8 @@ switchRespuestaSeleccionada(event: string): void {
       }
     });
   
-    console.log("se llamo a switchRespuestaSeleccionada// colorActivoSecundario: " + this.notificacionesService.colorActivoSecundario)
-    console.log("texto Largo Seleccionado: " + this.notificacionesService.textoLargoSeleccionado)
+/*     console.log("se llamo a switchRespuestaSeleccionada// colorActivoSecundario: " + this.notificacionesService.colorActivoSecundario)
+    console.log("texto Largo Seleccionado: " + this.notificacionesService.textoLargoSeleccionado) */
 }
 
 

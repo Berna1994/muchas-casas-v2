@@ -17,12 +17,6 @@ import { NotificacionesService } from '../../../public/services/notificaciones.s
   selector: 'app-columnas',
   standalone: true,
   imports: [CommonModule,
-    InformesComponent, 
-    MisionesComponent, 
-    HistoriaComponent, 
-    PersonajesComponent,
-    MundoComponent,
-    PalacioComponent,
     ImagenGiftAntorchasComponent,
     PajaritoComponent,
   ],
@@ -144,7 +138,7 @@ export class ColumnasComponent {
       this.backtoMenu()
     }
     this.currentComponent = InformesComponent
-    console.log ("se clikeo informes")
+/*     console.log ("se clikeo informes") */
   }
 
   clickMisiones (){
@@ -241,7 +235,7 @@ export class ColumnasComponent {
       this.backtoMenu()
     }
     this.currentComponent = MundoComponent;  // esto se usa para q el css de la ventana izq sea el de mundo
-    console.log ("se ejecuto con exito mapa mundo")
+/*     console.log ("se ejecuto con exito mapa mundo") */
   }
   
   clickpalacio(): void {
@@ -267,7 +261,7 @@ export class ColumnasComponent {
       this.backtoMenu()
     }
     this.currentComponent = PalacioComponent;  // esto se usa para q el css de la ventana izq sea el de mundo
-    console.log ("se ejecuto con exito mapa palacio")
+/*     console.log ("se ejecuto con exito mapa palacio") */
   }
 
   clickpalacio_cocina1(): void {
@@ -284,7 +278,7 @@ export class ColumnasComponent {
     } else {
       this.backtoMenu()
     }
-    console.log ("se ejecuto con exito cocina1")
+/*     console.log ("se ejecuto con exito cocina1") */
   }
 
   clickpalacio_cocina2(): void {
@@ -301,7 +295,7 @@ export class ColumnasComponent {
     } else {
       this.backtoMenu()
     }
-    console.log ("se ejecuto con exito cocina2")
+/*     console.log ("se ejecuto con exito cocina2") */
   }
 
   clickpalacio_dormitorio(): void {
@@ -318,7 +312,7 @@ export class ColumnasComponent {
     } else {
       this.backtoMenu()
     }
-    console.log ("se ejecuto con exito dormitorio")
+/*     console.log ("se ejecuto con exito dormitorio") */
   }
   
   
@@ -342,7 +336,7 @@ export class ColumnasComponent {
           this.backtoMenu()
         }
         this.currentComponent = EstrellasComponent;  // esto se usa para q el css de la ventana izq sea el de mundo
-        console.log ("se ejecuto con exito mapa estrellas")
+/*         console.log ("se ejecuto con exito mapa estrellas") */
   }
 
   backtoMenu() {
@@ -372,15 +366,15 @@ botEntreColumnas(event: MouseEvent){
   
   if (this.menuPrincipal === true) {           //PANTALLA PRINCIPAL
     if (idBoton.id === "button-left") {
-      console.log ("se llamo a clickmundo()")
+      // console.log ("se llamo a clickmundo()")
       this.clickmundo()
     }
     if (idBoton.id === "button-right") {
-      console.log ("se llamo a clickestrellas()")
+      // console.log ("se llamo a clickestrellas()")
       this.clickestrellas();
     }
     if (idBoton.id === "button-bottom") {
-      console.log ("se llamo a clickpalacio()")
+      // console.log ("se llamo a clickpalacio()")
       this.clickpalacio();
     }
     return           /* **** importante poner el return sino se activa el boton con 
@@ -388,7 +382,7 @@ botEntreColumnas(event: MouseEvent){
   }
   /*****/
   if (this.ventanaIzq === true){   
-    console.log ("se desactivaroon los botones entre columnas") 
+    // console.log ("se desactivaroon los botones entre columnas") 
     return                                                          // OTRO MENU ACTIVO
   }
   /*****/
@@ -408,12 +402,12 @@ botEntreColumnas(event: MouseEvent){
     }
     if (idBoton.id === "button-left") {
       this.clickpalacio_cocina1()
-      console.log ("se llamo a clickpalacio_cocina1()")
+      // console.log ("se llamo a clickpalacio_cocina1()")
       return
     }
     if (idBoton.id === "button-right") {
       this.clickpalacio_dormitorio()
-      console.log ("se llamo a clickpalacio_dormitorio()")
+      // console.log ("se llamo a clickpalacio_dormitorio()")
       return
     }
     }
@@ -422,12 +416,12 @@ botEntreColumnas(event: MouseEvent){
 
     if (idBoton.id === "button-left") {
       this.clickpalacio_cocina2()
-      console.log ("se llamo a clickpalacio_cocina2()")
+      // console.log ("se llamo a clickpalacio_cocina2()")
       return
     }
     if (idBoton.id === "button-right") {
       this.clickpalacio()
-      console.log ("se llamo a clickpalacio()")
+      // console.log ("se llamo a clickpalacio()")
       return
     }
     }
@@ -436,12 +430,12 @@ botEntreColumnas(event: MouseEvent){
 
     if (idBoton.id === "button-left") {
       this.backtoMenu()
-      console.log ("se llamo a backtomenu()")
+      // console.log ("se llamo a backtomenu()")
       return
     }
     if (idBoton.id === "button-right") {
       this.clickpalacio_cocina1()
-      console.log ("se llamo a clickpalacio_cocina1()")
+      // console.log ("se llamo a clickpalacio_cocina1()")
       return
     }
     }
@@ -450,7 +444,7 @@ botEntreColumnas(event: MouseEvent){
 
     if (idBoton.id === "button-left") {
       this.clickpalacio()
-      console.log ("se llamo a clickpalacio()")
+      // console.log ("se llamo a clickpalacio()")
       return
     }
     }
@@ -459,7 +453,7 @@ botEntreColumnas(event: MouseEvent){
   if (this.mapasActivosService.mapaEstrellas === true) {                                 
     if (idBoton.id === "button-left") {
       this.backtoMenu()
-      console.log ("se llamo a mapa estrellas()")
+      // console.log ("se llamo a mapa estrellas()")
     }
     return
   }

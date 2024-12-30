@@ -4,14 +4,16 @@ import { ColumnasComponent } from './columnas/columnas.component';
 import { CommonModule } from '@angular/common';
 import {ContadorService} from '../../public/services/contador-dias.service';
 import { NotificacionesService } from '../../public/services/notificaciones.service';
-
+import { Componentefirebase } from './firebase-component/component-firebase'; 
+import { ConfiguracionDatos } from './firebase-component/carga-de-datos';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ColumnasComponent, CommonModule,],
+  imports: [ColumnasComponent, CommonModule, Componentefirebase,],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  
 })
 export class AppComponent implements OnInit {
   
@@ -31,9 +33,6 @@ export class AppComponent implements OnInit {
   varContadorDeClicks: number = 0;
   // lista neta de arrays
   listaNetadeArrays: string[] = []; 
-  // contenedor indice del arrays bruto
-  indiceArrayBrutoAcostarce: number = 100;
-  indiceArrayBrutoDespertarce: number = 100;
   // indice del dialogo elegido en pasar turno
   ArrayindexDialogo: number[] = [];
   // botones aceptar y rechazar pasar turno
@@ -350,7 +349,11 @@ export class AppComponent implements OnInit {
 
 
   // ------------------------ notificaciones -----------------------------------------------
-  constructor (private contadorService: ContadorService, public notificacionesService: NotificacionesService) {}
+  constructor (
+    private contadorService: ContadorService, 
+    public notificacionesService: NotificacionesService,
+    public configuracionDatos: ConfiguracionDatos, // Servicio inyectado
+  ) {}
 
   incrementarContador(): void {
     this.contadorService.incrementar(); // cambia el valor del día actual +1

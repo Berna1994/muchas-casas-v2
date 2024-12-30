@@ -1,7 +1,9 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { firebaseProviders } from './app/firebase-component/firebase-init';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
-
+bootstrapApplication(AppComponent, {
+  providers: [
+    ...firebaseProviders,
+  ],
+}).catch(err => console.error(err));
